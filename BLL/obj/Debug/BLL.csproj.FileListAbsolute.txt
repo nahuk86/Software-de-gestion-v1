@@ -9,3 +9,14 @@ C:\Users\nahue\source\repos\Software de gestion v1\BLL\bin\Debug\Domain.pdb
 C:\Users\nahue\source\repos\Software de gestion v1\BLL\obj\Debug\BLL.csproj.Up2Date
 C:\Users\nahue\source\repos\Software de gestion v1\BLL\obj\Debug\BLL.dll
 C:\Users\nahue\source\repos\Software de gestion v1\BLL\obj\Debug\BLL.pdb
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\bin\Debug\BLL.dll
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\bin\Debug\BLL.pdb
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\bin\Debug\DAL.dll
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\bin\Debug\Domain.dll
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\bin\Debug\DAL.pdb
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\bin\Debug\Domain.pdb
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\obj\Debug\BLL.csproj.Up2Date
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\obj\Debug\BLL.dll
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\obj\Debug\BLL.pdb
