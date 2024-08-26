@@ -1,9 +1,8 @@
-
 # Gestión de Locales de Ventas de Accesorios de Telefonía Celular
 
 ## Descripción del Proyecto
 
-Este proyecto es una aplicación de escritorio para la gestión de locales de ventas de accesorios de telefonía celular. Actualmente, el enfoque está en la funcionalidad de autenticación y la administración de usuarios según sus roles, permitiendo que diferentes tipos de usuarios (Depósito, Gerente, Vendedor) vean diferentes interfaces de usuario.
+Este proyecto es una aplicación de escritorio para la gestión de locales de ventas de accesorios de telefonía celular. El enfoque actual está en la funcionalidad de autenticación y la administración de usuarios según sus roles, permitiendo que diferentes tipos de usuarios (Depósito, Gerente, Vendedor) vean diferentes interfaces de usuario.
 
 ## Estructura del Proyecto
 
@@ -27,10 +26,6 @@ GestionLocalesTelefonia.sln
 |   |   |-- RoleBasedUIFactory.cs           // Fábrica para crear la instancia correcta de UI según el rol
 |
 |-- GestionLocalesTelefonia.UI
-|   |-- UIHandlers
-|   |   |-- DepositoUIHandler.cs            // Manejador de UI para el rol de Depósito
-|   |   |-- GerenteUIHandler.cs             // Manejador de UI para el rol de Gerente
-|   |   |-- VendedorUIHandler.cs            // Manejador de UI para el rol de Vendedor
 |   |-- Forms
 |   |   |-- Home_deposito.cs                // Formulario para el rol de Depósito
 |   |   |-- Home_deposito.Designer.cs
@@ -38,10 +33,13 @@ GestionLocalesTelefonia.sln
 |   |   |-- Home_gerente.Designer.cs
 |   |   |-- Home_vendedor.cs                // Formulario para el rol de Vendedor
 |   |   |-- Home_vendedor.Designer.cs
-|   |-- Program.cs                          // Punto de entrada de la aplicación
-|   |-- Pantalla_inicio.cs                        // Formulario de inicio de sesión
+|   |-- Program.cs                          // Punto de entrada de la aplicación, configuración de dependencias
+|   |-- Pantalla_inicio.cs                  // Formulario principal, maneja la autenticación y la navegación según roles
 |   |-- Pantalla_inicio.Designer.cs
-|
+|   |-- UIHandlers
+|       |-- DepositoUIHandler.cs            // Manejador de UI para el rol de Depósito
+|       |-- GerenteUIHandler.cs             // Manejador de UI para el rol de Gerente
+|       |-- VendedorUIHandler.cs            // Manejador de UI para el rol de Vendedor
 ```
 
 ## Requisitos Previos
@@ -107,10 +105,45 @@ string connectionString = "Server=tu_servidor;Database=GestionLocalesTelefoniaDB
 1. **Inicio de Sesión**: Ingresa un nombre de usuario y contraseña.
 2. **Navegación por Rol**: Según el rol del usuario autenticado, la aplicación mostrará la interfaz correspondiente (`Home_deposito`, `Home_gerente`, `Home_vendedor`).
 
-## Funcionalidades Implementadas
+## Patrones de Diseño Utilizados
 
-- **Autenticación de Usuarios**: Los usuarios pueden iniciar sesión con su nombre de usuario y contraseña.
-- **Navegación Basada en Roles**: Dependiendo del rol asignado, se presenta una interfaz diferente.
+### 1. **Arquitectura en Capas (Layered Architecture)**
+   - Separa la aplicación en diferentes capas: Dominio, DAL, BLL y UI.
+
+### 2. **Patrón de Inyección de Dependencias (Dependency Injection)**
+   - Permite la inyección de dependencias, facilitando la prueba y mantenimiento del código.
+
+### 3. **Patrón de Fábrica (Factory)**
+   - La clase `RoleBasedUIFactory` en la BLL se utiliza para crear y devolver el manejador de UI adecuado según el rol del usuario autenticado.
+
+### 4. **Patrón Estrategia (Strategy)**
+   - Los manejadores de UI implementan la interfaz `IRoleBasedUI`, proporcionando diferentes implementaciones para diferentes roles de usuario.
+
+### 5. **Patrón de Repositorio (Repository Pattern)**
+   - `UsuarioRepository` en la DAL encapsula las operaciones de acceso a datos, proporcionando una interfaz limpia para `UsuarioService`.
+
+## Buenas Prácticas Seguidas
+
+### 1. **Separación de Responsabilidades (SoC)**
+   - Cada capa tiene responsabilidades claras y bien definidas.
+
+### 2. **Inversión de Control (IoC)**
+   - Implementada a través de la inyección de dependencias en `Program.cs`.
+
+### 3. **Modularidad**
+   - Los componentes son modulares y pueden ser desarrollados, testeados y mantenidos de manera independiente.
+
+### 4. **Facilidad de Pruebas**
+   - Las clases están diseñadas para ser fácilmente testeables, gracias a la inyección de dependencias y patrones de diseño.
+
+### 5. **Uso de Nombres Descriptivos**
+   - Los nombres de clases, métodos y variables son claros y reflejan su propósito.
+
+### 6. **Evitar Código Duplicado**
+   - La lógica compartida se centraliza, evitando duplicación de código.
+
+### 7. **Gestión de Errores**
+   - Implementada para proporcionar retroalimentación adecuada al usuario y prevenir fallos en el sistema.
 
 ## Próximos Pasos
 
@@ -134,13 +167,12 @@ Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para má
 ## Contacto
 
 Para cualquier consulta, puedes contactarme en [tu-email@dominio.com].
-
 ```
 
 ### Instrucciones para Usar el `README.md`
 
 1. **Crea un archivo `README.md`** en la raíz de tu proyecto.
 2. **Copia y pega** el contenido proporcionado en este archivo.
-3. **Ajusta** cualquier detalle específico, como el nombre del servidor, correo electrónico, u otros aspectos de configuración que sean únicos para tu entorno.
+3. **Ajusta** cualquier detalle específico, como el nombre del servidor, correo electrónico u otros aspectos de configuración que sean únicos para tu entorno.
 
-Este archivo proporciona una guía clara y estructurada sobre cómo configurar y ejecutar el proyecto, así como detalles sobre su arquitectura y futuros desarrollos. Si necesitas más ajustes o información adicional, ¡estoy aquí para ayudarte!
+Este archivo `README.md` refleja la estructura y las prácticas actuales del proyecto, proporcionando una guía clara sobre cómo configurarlo, ejecutarlo, y las decisiones arquitectónicas clave que se tomaron. Si necesitas más ajustes o información adicional, ¡estoy aquí para ayudarte!
