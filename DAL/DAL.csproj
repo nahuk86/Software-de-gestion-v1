@@ -45,6 +45,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ArqBase\ArqBase.csproj">
+      <Project>{0cd74aa9-83be-4eef-ad24-dc180aef5c49}</Project>
+      <Name>ArqBase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{b975c58b-9181-43d2-9a15-c1e2c1f58f7a}</Project>
       <Name>Domain</Name>

@@ -32,3 +32,5 @@ C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.csproj.Up2Date
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.exe
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.pdb
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\bin\Debug\ArqBase.dll
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\bin\Debug\ArqBase.pdb

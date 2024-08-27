@@ -47,6 +47,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ArqBase\ArqBase.csproj">
+      <Project>{0cd74aa9-83be-4eef-ad24-dc180aef5c49}</Project>
+      <Name>ArqBase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{c7f29b24-20fa-4d37-b816-60cdbdef015d}</Project>
       <Name>DAL</Name>

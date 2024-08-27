@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
+using ArqBase;
 
 namespace DAL
 {
@@ -15,6 +16,14 @@ namespace DAL
         public UsuarioRepository(string connectionString)
         {
             _connectionString = connectionString;
+        }
+
+        public void CrearUsuario(string username, string password)
+        {
+            string hashedPassword = PasswordHasher.HashPassword(password);
+            // Inserta el usuario en la base de datos con la contraseña hasheada
+            // Ejemplo de SQL:
+            // INSERT INTO Usuarios (Username, Password) VALUES (@Username, @Password)
         }
 
         public Usuario ObtenerUsuarioPorNombre(string username)
@@ -38,6 +47,37 @@ namespace DAL
                         Username = (string)reader["Username"],
                         Password = (string)reader["Password"]
                     };
+                }
+            }
+
+            return usuario;
+        }
+
+        public Usuario ObtenerUsuarioPorNombreYPassword(string username, string password)
+        {
+            Usuario usuario = null;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT Id, Username, Password FROM Usuarios WHERE Username = @Username";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", username);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    string storedHash = reader["Password"].ToString();
+                    if (PasswordHasher.VerifyPassword(password, storedHash))
+                    {
+                        usuario = new Usuario
+                        {
+                            Id = (int)reader["Id"],
+                            Username = (string)reader["Username"],
+                            Password = storedHash  // Se recomienda no guardar esto en memoria
+                        };
+                    }
                 }
             }
 

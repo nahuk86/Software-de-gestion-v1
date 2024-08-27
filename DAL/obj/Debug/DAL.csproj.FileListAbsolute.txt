@@ -16,3 +16,5 @@ C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\obj\Debug\D
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\obj\Debug\DAL.csproj.Up2Date
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\obj\Debug\DAL.dll
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\obj\Debug\DAL.pdb
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\bin\Debug\ArqBase.dll
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\bin\Debug\ArqBase.pdb

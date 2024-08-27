@@ -20,3 +20,5 @@ C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\obj\Debug\B
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\obj\Debug\BLL.csproj.Up2Date
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\obj\Debug\BLL.dll
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\obj\Debug\BLL.pdb
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\bin\Debug\ArqBase.dll
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\BLL\bin\Debug\ArqBase.pdb
