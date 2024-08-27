@@ -18,7 +18,7 @@ namespace BLL
             _depositoUI = depositoUI;
             _gerenteUI = gerenteUI;
             _vendedorUI = vendedorUI;
-        }
+        } // Método para obtener el UI Handler de un rol de usuario
 
         public IRoleBasedUI GetUIHandler(string rolUsuario)
         {
@@ -38,6 +38,6 @@ namespace BLL
             {
                 return null;
             }
-        }
+        } // Método para obtener el UI Handler de un rol de usuario
     }
 }

@@ -18,7 +18,7 @@ namespace BLL
         public UsuarioService(string connectionString)
         {
             _usuarioRepository = new UsuarioRepository(connectionString);
-        }
+        } // Método para crear un usuario
 
         public bool AutenticarUsuario(string username, string password)
         {
@@ -28,7 +28,7 @@ namespace BLL
                 return false;
 
             return usuario.Password == password;
-        }
+        } // Método para autenticar un usuario
 
         public string ObtenerRolUsuario(string username)
         {
@@ -37,6 +37,6 @@ namespace BLL
                 return null;
 
             return _usuarioRepository.ObtenerRolPorUsuarioId(usuario.Id);
-        }
+        } // Método para obtener el rol de un usuario
     }
 }

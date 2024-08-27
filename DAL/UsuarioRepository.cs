@@ -48,10 +48,10 @@ namespace DAL
                         Password = (string)reader["Password"]
                     };
                 }
-            }
+            } // Retorna el usuario encontrado o null si no existe
 
             return usuario;
-        }
+        } // Método para obtener un usuario por nombre.
 
         public Usuario ObtenerUsuarioPorNombreYPassword(string username, string password)
         {
@@ -82,7 +82,7 @@ namespace DAL
             }
 
             return usuario;
-        }
+        } // Método para obtener un usuario por nombre y contraseña
 
         public string ObtenerRolPorUsuarioId(int userId)
         {
@@ -104,6 +104,6 @@ namespace DAL
             }
 
             return rol;
-        }
+        } // Método para obtener el rol de un usuario por su Id
     }
 }
