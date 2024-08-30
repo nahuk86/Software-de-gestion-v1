@@ -9,5 +9,6 @@ namespace BLL.Interfaces
     public interface IRoleBasedUI
     {
         void MostrarUI();
+        void MostrarUI(IClienteService clienteService);
     }
 }

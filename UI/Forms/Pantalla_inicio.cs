@@ -1,4 +1,6 @@
 ﻿using BLL;
+using BLL.Interfaces;
+using BLL.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,13 +17,18 @@ namespace UI
     {
         private readonly UsuarioService _usuarioService;
         private readonly RoleBasedUIFactory _uiFactory;
+        private readonly IClienteService _clienteService;
 
 
-        public Pantalla_inicio(UsuarioService usuarioService, RoleBasedUIFactory uiFactory)
+
+        public Pantalla_inicio(UsuarioService usuarioService, RoleBasedUIFactory uiFactory, IClienteService clienteService)
         {
             InitializeComponent();
             _usuarioService = usuarioService;
             _uiFactory = uiFactory;
+            _clienteService = clienteService;
+
+
         }
 
 
@@ -35,7 +42,7 @@ namespace UI
             }
             else if (rolUsuario == "User")
             {
-                Home_vendedor home_Vendedor = new Home_vendedor();
+                Home_vendedor home_Vendedor = new Home_vendedor(_clienteService);
                 home_Vendedor.Show();
             }
             else if (rolUsuario == "Guest")
@@ -63,12 +70,21 @@ namespace UI
             if (autenticado)
             {
                 string rolUsuario = _usuarioService.ObtenerRolUsuario(username);
-
                 var uiHandler = _uiFactory.GetUIHandler(rolUsuario);
 
                 if (uiHandler != null)
                 {
-                    uiHandler.MostrarUI();
+                    if (rolUsuario == "Vendedor") // O cualquier otro rol que necesite ClienteService
+                    {
+                        string connectionString = "Server=NAHUEL-WINDOWS\\SQLEXPRESS;Database=GestionLocalesTelefoniaDB;Integrated Security=True;";
+                        IClienteService clienteService = new ClienteService(connectionString);
+                        uiHandler.MostrarUI(clienteService);
+                    }
+                    else
+                    {
+                        uiHandler.MostrarUI();
+                    }
+
                     this.Hide(); // Oculta el formulario de inicio de sesión
                 }
                 else

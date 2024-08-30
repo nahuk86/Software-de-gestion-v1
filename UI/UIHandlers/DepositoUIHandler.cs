@@ -15,5 +15,10 @@ namespace UI.UIHandlers
             Home_deposito formDeposito = new Home_deposito();
             formDeposito.Show();
         }
+
+        public void MostrarUI(IClienteService clienteService)
+        {
+            MostrarUI(); // Llamar al método sin parámetros
+        }
     }
 }

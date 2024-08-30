@@ -9,10 +9,16 @@ namespace UI.UIHandlers
 {
     public class VendedorUIHandler : IRoleBasedUI
     {
+
+        public void MostrarUI(IClienteService clienteService)
+        {
+            Home_vendedor formVendedor = new Home_vendedor(clienteService);
+            formVendedor.Show();
+        }
+
         public void MostrarUI()
         {
-            Home_vendedor formVendedor = new Home_vendedor();
-            formVendedor.Show();
+            throw new NotImplementedException("Este UIHandler requiere ClienteService.");
         }
     }
 }
