@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using BLL.Services;
 using BLL.Interfaces;
 using UI.Forms.Forms_vendedor;
+using System.Configuration;
+using System.Data.Common;
 
 namespace UI
 {
@@ -18,11 +20,13 @@ namespace UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            // Obtener la cadena de conexión desde App.config
+            var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
             // Crear las instancias de UI Handlers
             var depositoUIHandler = new DepositoUIHandler();
             var gerenteUIHandler = new GerenteUIHandler();
             var vendedorUIHandler = new VendedorUIHandler();
-            var connectionString = "Server=NAHUEL-WINDOWS\\SQLEXPRESS;Database=GestionLocalesTelefoniaDB;Integrated Security=True;";
 
             IClienteService clienteService = new ClienteService(connectionString);
 

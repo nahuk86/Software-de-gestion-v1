@@ -4,6 +4,7 @@ using BLL.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -76,7 +77,7 @@ namespace UI
                 {
                     if (rolUsuario == "Vendedor") // O cualquier otro rol que necesite ClienteService
                     {
-                        string connectionString = "Server=NAHUEL-WINDOWS\\SQLEXPRESS;Database=GestionLocalesTelefoniaDB;Integrated Security=True;";
+                        var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
                         IClienteService clienteService = new ClienteService(connectionString);
                         uiHandler.MostrarUI(clienteService);
                     }
