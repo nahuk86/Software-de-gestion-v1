@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using ArqBase;
+using DAL.Repositories;
 
 namespace BLL
 {
