@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.Forms.Forms_gerente;
+using UI.Forms.Forms_vendedor;
 
 namespace UI
 {
@@ -15,6 +17,20 @@ namespace UI
         public Home_gerente()
         {
             InitializeComponent();
+            this.IsMdiContainer = true;
+
+        }
+
+        private void Home_gerente_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void crearUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            form_crear_usuario formHijo = new form_crear_usuario();
+            formHijo.MdiParent = this;  // Configura el formulario padre
+            formHijo.Show();
         }
     }
 }

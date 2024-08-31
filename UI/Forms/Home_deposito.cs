@@ -16,5 +16,10 @@ namespace UI
         {
             InitializeComponent();
         }
+
+        private void Home_deposito_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

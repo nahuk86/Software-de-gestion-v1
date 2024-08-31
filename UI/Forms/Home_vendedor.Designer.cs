@@ -43,6 +43,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ventasToolStripMenuItem,
@@ -50,7 +51,7 @@
             this.validarConexionSqlToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(161, 450);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -60,7 +61,7 @@
             this.registrarVentaToolStripMenuItem,
             this.listarVentasToolStripMenuItem});
             this.ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
-            this.ventasToolStripMenuItem.Size = new System.Drawing.Size(66, 26);
+            this.ventasToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.ventasToolStripMenuItem.Text = "Ventas";
             // 
             // registrarVentaToolStripMenuItem
@@ -83,7 +84,7 @@
             this.listarClienteToolStripMenuItem,
             this.lisToolStripMenuItem});
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(75, 26);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.clientesToolStripMenuItem.Text = "Clientes";
             // 
             // crearNuevoClienteToolStripMenuItem
@@ -104,12 +105,11 @@
             this.lisToolStripMenuItem.Name = "lisToolStripMenuItem";
             this.lisToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.lisToolStripMenuItem.Text = "Listar clientes";
-            this.lisToolStripMenuItem.Click += new System.EventHandler(this.lisToolStripMenuItem_Click);
             // 
             // validarConexionSqlToolStripMenuItem
             // 
             this.validarConexionSqlToolStripMenuItem.Name = "validarConexionSqlToolStripMenuItem";
-            this.validarConexionSqlToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.validarConexionSqlToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.validarConexionSqlToolStripMenuItem.Text = "validar conexion sql";
             this.validarConexionSqlToolStripMenuItem.Click += new System.EventHandler(this.validarConexionSqlToolStripMenuItem_Click);
             // 
@@ -122,6 +122,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Home_vendedor";
             this.Text = "Home_vendedor";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Home_vendedor_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

@@ -23,15 +23,11 @@ namespace UI
         {
             InitializeComponent();
             this.IsMdiContainer = true;
-            InitializeComponent();
             _clienteService = clienteService ?? throw new ArgumentNullException(nameof(clienteService));
 
         }
 
-        private void lisToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void registrarVentaToolStripMenuItem_Click(object sender, EventArgs e)
         {

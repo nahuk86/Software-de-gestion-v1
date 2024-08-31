@@ -36,17 +36,17 @@ namespace UI
         private void IniciarAplicacionParaUsuario(string rolUsuario)
         {
             // Aquí definimos la lógica para iniciar la aplicación según el rol
-            if (rolUsuario == "Admin")
+            if (rolUsuario == "Gerente")
             {
                 Home_gerente formGerente = new Home_gerente();
                 formGerente.Show();
             }
-            else if (rolUsuario == "User")
+            else if (rolUsuario == "Vendedor")
             {
                 Home_vendedor home_Vendedor = new Home_vendedor(_clienteService);
                 home_Vendedor.Show();
             }
-            else if (rolUsuario == "Guest")
+            else if (rolUsuario == "Deposito")
             {
                 Home_deposito home_Deposito = new Home_deposito();
                 home_Deposito.Show();
@@ -100,6 +100,11 @@ namespace UI
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Pantalla_inicio_Load(object sender, EventArgs e)
         {
 
         }

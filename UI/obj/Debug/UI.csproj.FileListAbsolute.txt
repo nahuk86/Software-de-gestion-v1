@@ -37,3 +37,6 @@ C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\bin\Debug\Ar
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Forms.Forms_vendedor.registrar_venta.resources
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Home_vendedor.resources
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Forms.Forms_vendedor.alta_cliente.resources
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Home_deposito.resources
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Home_gerente.resources
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Forms.Forms_gerente.form_crear_usuario.resources

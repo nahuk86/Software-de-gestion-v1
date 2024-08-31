@@ -17,7 +17,7 @@ namespace DAL.Repositories
             _connectionString = connectionString;
         }
 
-        public void AgregarCliente(ClienteDTO cliente)
+        public void AgregarCliente(ClienteDTO cliente) // Método para agregar un cliente
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {

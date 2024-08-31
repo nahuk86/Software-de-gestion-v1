@@ -79,7 +79,7 @@
             this.label2.Text = "Contraseña";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // Form1
+            // Pantalla_inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -89,8 +89,9 @@
             this.Controls.Add(this.input_txt_password);
             this.Controls.Add(this.input_txt_username);
             this.Controls.Add(this.button_access);
-            this.Name = "Form1";
+            this.Name = "Pantalla_inicio";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Pantalla_inicio_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

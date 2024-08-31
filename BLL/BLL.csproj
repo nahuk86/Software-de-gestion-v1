@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AltaClienteCommand.cs" />
+    <Compile Include="DTOs\UsuarioDTO.cs" />
     <Compile Include="Interfaces\IClienteService.cs" />
     <Compile Include="Services\ClienteService.cs" />
     <Compile Include="UIHandlers\RoleBasedUIFactory.cs" />

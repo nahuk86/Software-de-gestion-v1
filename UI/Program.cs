@@ -10,6 +10,7 @@ using BLL.Interfaces;
 using UI.Forms.Forms_vendedor;
 using System.Configuration;
 using System.Data.Common;
+using UI.Forms.Forms_gerente;
 
 namespace UI
 {
@@ -34,11 +35,14 @@ namespace UI
             var uiFactory = new RoleBasedUIFactory(depositoUIHandler, gerenteUIHandler, vendedorUIHandler);
 
             // Configuración manual de la cadena de conexión
-            var usuarioService = new UsuarioService(connectionString);
+            var usuarioService = new UsuarioService();
 
             // Iniciar la aplicación con la pantalla de inicio de sesión
             var loginForm = new Pantalla_inicio(usuarioService, uiFactory, clienteService);
             Application.Run(loginForm);
+
+            //var loginForm = new form_crear_usuario();
+            //Application.Run(loginForm);
 
             // Una vez que Pantalla_inicio se cierre, podrías abrir otro formulario según sea necesario.
             // Sin embargo, no debes llamar a Application.Run más de una vez.

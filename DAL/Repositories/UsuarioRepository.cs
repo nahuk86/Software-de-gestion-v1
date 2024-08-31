@@ -18,12 +18,26 @@ namespace DAL.Repositories
             _connectionString = connectionString;
         }
 
-        public void CrearUsuario(string username, string password)
+        public void CrearUsuario(Usuario usuario)
         {
-            string hashedPassword = PasswordHasher.HashPassword(password);
-            // Inserta el usuario en la base de datos con la contraseña hasheada
-            // Ejemplo de SQL:
-            // INSERT INTO Usuarios (Username, Password) VALUES (@Username, @Password)
+            string hashedPassword = PasswordHasher.HashPassword(usuario.Password);
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "INSERT INTO Usuarios (Username, Password, Email, Nombre, Apellido, DNI, Rol) " +
+                               "VALUES (@Username, @Password, @Email, @Nombre, @Apellido, @DNI, @Rol)";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", usuario.Username);
+                command.Parameters.AddWithValue("@Password", hashedPassword);
+                command.Parameters.AddWithValue("@Email", usuario.Email);
+                command.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                command.Parameters.AddWithValue("@Apellido", usuario.Apellido);
+                command.Parameters.AddWithValue("@DNI", usuario.DNI);
+                command.Parameters.AddWithValue("@Rol", usuario.Rol);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
 
         public Usuario ObtenerUsuarioPorNombre(string username)
@@ -32,7 +46,8 @@ namespace DAL.Repositories
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT Id, Username, Password FROM Usuarios WHERE Username = @Username";
+                string query = "SELECT Id, Username, Password, Email, Nombre, Apellido, DNI, Rol " +
+                               "FROM Usuarios WHERE Username = @Username";
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Username", username);
 
@@ -45,13 +60,51 @@ namespace DAL.Repositories
                     {
                         Id = (int)reader["Id"],
                         Username = (string)reader["Username"],
-                        Password = (string)reader["Password"]
+                        Password = (string)reader["Password"],
+                        Email = (string)reader["Email"],
+                        Nombre = (string)reader["Nombre"],
+                        Apellido = (string)reader["Apellido"],
+                        DNI = (string)reader["DNI"],
+                        Rol = (string)reader["Rol"]
                     };
                 }
-            } // Retorna el usuario encontrado o null si no existe
+            }
 
             return usuario;
-        } // Método para obtener un usuario por nombre.
+        }
+
+        public Usuario ObtenerUsuarioPorEmail(string email)
+        {
+            Usuario usuario = null;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT Id, Username, Password, Email, Nombre, Apellido, DNI, Rol " +
+                               "FROM Usuarios WHERE Email = @Email";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Email", email);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    usuario = new Usuario
+                    {
+                        Id = (int)reader["Id"],
+                        Username = (string)reader["Username"],
+                        Password = (string)reader["Password"],
+                        Email = (string)reader["Email"],
+                        Nombre = (string)reader["Nombre"],
+                        Apellido = (string)reader["Apellido"],
+                        DNI = (string)reader["DNI"],
+                        Rol = (string)reader["Rol"]
+                    };
+                }
+            }
+
+            return usuario;
+        }
 
         public Usuario ObtenerUsuarioPorNombreYPassword(string username, string password)
         {
@@ -59,7 +112,8 @@ namespace DAL.Repositories
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT Id, Username, Password FROM Usuarios WHERE Username = @Username";
+                string query = "SELECT Id, Username, Password, Email, Nombre, Apellido, DNI, Rol " +
+                               "FROM Usuarios WHERE Username = @Username";
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Username", username);
 
@@ -75,14 +129,19 @@ namespace DAL.Repositories
                         {
                             Id = (int)reader["Id"],
                             Username = (string)reader["Username"],
-                            Password = storedHash  // Se recomienda no guardar esto en memoria
+                            Password = storedHash,  // Se recomienda no guardar esto en memoria
+                            Email = (string)reader["Email"],
+                            Nombre = (string)reader["Nombre"],
+                            Apellido = (string)reader["Apellido"],
+                            DNI = (string)reader["DNI"],
+                            Rol = (string)reader["Rol"]
                         };
                     }
                 }
             }
 
             return usuario;
-        } // Método para obtener un usuario por nombre y contraseña
+        }
 
         public string ObtenerRolPorUsuarioId(int userId)
         {
@@ -90,7 +149,7 @@ namespace DAL.Repositories
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT Rol FROM RolesUsuarios WHERE UsuarioId = @UsuarioId";
+                string query = "SELECT Rol FROM Usuarios WHERE Id = @UsuarioId";
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@UsuarioId", userId);
 
@@ -104,6 +163,6 @@ namespace DAL.Repositories
             }
 
             return rol;
-        } // Método para obtener el rol de un usuario por su Id
+        }
     }
 }
