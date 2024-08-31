@@ -11,6 +11,7 @@ using UI.Forms.Forms_vendedor;
 using System.Configuration;
 using System.Data.Common;
 using UI.Forms.Forms_gerente;
+using ArqBase.BLL;
 
 namespace UI
 {
@@ -36,6 +37,7 @@ namespace UI
 
             // Configuración manual de la cadena de conexión
             var usuarioService = new UsuarioService();
+            var bitacoraService = new BitacoraService(connectionString);
 
             // Iniciar la aplicación con la pantalla de inicio de sesión
             var loginForm = new Pantalla_inicio(usuarioService, uiFactory, clienteService);

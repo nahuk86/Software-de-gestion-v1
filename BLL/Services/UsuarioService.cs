@@ -11,6 +11,8 @@ using ArqBase;
 using DAL.Repositories;
 using System.Configuration;
 using BLL.DTOs;
+using ArqBase.BLL;
+
 
 
 namespace BLL
@@ -18,11 +20,14 @@ namespace BLL
     public class UsuarioService
     {
         private readonly UsuarioRepository _usuarioRepository;
+        private readonly BitacoraService _bitacoraService;
+
 
         public UsuarioService()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             _usuarioRepository = new UsuarioRepository(connectionString);
+            _bitacoraService = new BitacoraService(connectionString);
         }
 
         // Método para autenticar un usuario
@@ -74,6 +79,8 @@ namespace BLL
 
             // Guardar el usuario en la base de datos
             _usuarioRepository.CrearUsuario(usuario);
+            _bitacoraService.Registrar(usuario.Username, "Creación de usuario", $"Usuario {usuario.Username} creado con rol {usuario.Rol}");
+
         }
 
         // Método para encriptar la contraseña
