@@ -1,52 +1,47 @@
-# Gestión de Locales de Ventas de Accesorios de Telefonía Celular
+# Software de Gestión para Locales de Telefonía Celular
 
 ## Descripción del Proyecto
 
-Este proyecto es una aplicación de escritorio para la gestión de locales de ventas de accesorios de telefonía celular. El enfoque actual está en la funcionalidad de autenticación y la administración de usuarios según sus roles, permitiendo que diferentes tipos de usuarios (Depósito, Gerente, Vendedor) vean diferentes interfaces de usuario.
+Este proyecto es una aplicación de escritorio diseñada para la gestión de locales de ventas de accesorios de telefonía celular. El enfoque principal está en la funcionalidad de autenticación y administración de usuarios, permitiendo que diferentes tipos de usuarios (Depósito, Gerente, Vendedor) vean diferentes interfaces de usuario.
+
+## Funcionalidades Cubiertas
+
+- **Autenticación de Usuarios**: La aplicación permite la autenticación segura de usuarios mediante el uso de hashing de contraseñas con sal.
+- **Gestión de Usuarios**: Los usuarios pueden ser creados, asignados a roles específicos y administrados a través de una interfaz de usuario.
+- **Roles de Usuario**: Se manejan tres tipos de roles:
+  - **Gerente**: Acceso a la administración completa del sistema.
+  - **Vendedor**: Acceso limitado a las funciones de ventas.
+  - **Depósito**: Acceso a la gestión de inventario.
+- **Bitácora de Transacciones**: Registro de todas las transacciones realizadas por los usuarios en el sistema, lo que permite llevar un control y auditoría de las actividades.
 
 ## Estructura del Proyecto
 
-La solución está dividida en varias capas siguiendo la arquitectura en capas (Layered Architecture), lo que permite una separación clara de responsabilidades.
+El proyecto está dividido en varias capas siguiendo la arquitectura en capas (Layered Architecture), lo que permite una separación clara de responsabilidades.
 
-```
-GestionLocalesTelefonia.sln
-|
-|-- GestionLocalesTelefonia.Dominio
-|   |-- Usuario.cs
-|
-|-- GestionLocalesTelefonia.DAL
-|   |-- UsuarioRepository.cs
-|
-|-- GestionLocalesTelefonia.BLL
-|   |-- Interfaces
-|   |   |-- IRoleBasedUI.cs                 // Interfaz para las estrategias de UI según roles
-|   |-- Services
-|   |   |-- UsuarioService.cs               // Servicio que maneja la lógica de usuarios y roles
-|   |-- UIHandlers
-|   |   |-- RoleBasedUIFactory.cs           // Fábrica para crear la instancia correcta de UI según el rol
-|
-|-- GestionLocalesTelefonia.UI
-|   |-- Forms
-|   |   |-- Home_deposito.cs                // Formulario para el rol de Depósito
-|   |   |-- Home_deposito.Designer.cs
-|   |   |-- Home_gerente.cs                 // Formulario para el rol de Gerente
-|   |   |-- Home_gerente.Designer.cs
-|   |   |-- Home_vendedor.cs                // Formulario para el rol de Vendedor
-|   |   |-- Home_vendedor.Designer.cs
-|   |-- Program.cs                          // Punto de entrada de la aplicación, configuración de dependencias
-|   |-- Pantalla_inicio.cs                  // Formulario principal, maneja la autenticación y la navegación según roles
-|   |-- Pantalla_inicio.Designer.cs
-|   |-- UIHandlers
-|       |-- DepositoUIHandler.cs            // Manejador de UI para el rol de Depósito
-|       |-- GerenteUIHandler.cs             // Manejador de UI para el rol de Gerente
-|       |-- VendedorUIHandler.cs            // Manejador de UI para el rol de Vendedor
-```
+- **Domain**: Contiene las entidades y reglas de negocio fundamentales.
+- **DAL (Data Access Layer)**: Maneja el acceso a la base de datos y las operaciones CRUD.
+- **BLL (Business Logic Layer)**: Contiene la lógica de negocio y los servicios de la aplicación.
+- **UI (User Interface)**: La capa de presentación que incluye las interfaces de usuario.
+
+## Patrones de Diseño Utilizados
+
+1. **Arquitectura en Capas (Layered Architecture)**: Separación de la aplicación en capas claras (Dominio, DAL, BLL, UI) para una mejor mantenibilidad y escalabilidad.
+   
+2. **Patrón de Inyección de Dependencias (Dependency Injection)**: Facilita la inyección de dependencias, promoviendo un código más limpio y fácil de mantener.
+   
+3. **Patrón de Fábrica (Factory)**: Utilizado para crear y manejar la instancia correcta de UI según el rol del usuario autenticado.
+   
+4. **Patrón Repositorio (Repository Pattern)**: Implementado en la DAL para gestionar el acceso a datos, proporcionando una capa de abstracción sobre la lógica de acceso a la base de datos.
+
+5. **Patrón Estrategia (Strategy)**: La capa UI implementa la lógica para manejar diferentes interfaces según los roles de usuario, utilizando diferentes estrategias de interfaz.
+
+6. **Patrón de Registro de Actividad (Logger Pattern)**: Implementado para registrar todas las transacciones y actividades en el sistema, facilitando auditorías y análisis.
 
 ## Requisitos Previos
 
 - **Visual Studio 2019/2022** o superior.
 - **.NET Framework 4.7.2** o superior.
-- **SQL Server** (local o en la nube) para la base de datos.
+- **SQL Server** para la base de datos.
 
 ## Configuración del Proyecto
 
@@ -64,30 +59,26 @@ GO
 CREATE TABLE Usuarios (
     Id INT PRIMARY KEY IDENTITY(1,1),
     Username NVARCHAR(50) NOT NULL,
-    Password NVARCHAR(255) NOT NULL
+    Password NVARCHAR(255) NOT NULL,
+    Email NVARCHAR(255) NOT NULL,
+    Nombre NVARCHAR(100) NOT NULL,
+    Apellido NVARCHAR(100) NOT NULL,
+    DNI NVARCHAR(20) NOT NULL,
+    Rol NVARCHAR(50) NOT NULL
 );
 
-CREATE TABLE RolesUsuarios (
-    UsuarioId INT PRIMARY KEY,
-    Rol NVARCHAR(50) NOT NULL,
-    FOREIGN KEY (UsuarioId) REFERENCES Usuarios(Id)
+CREATE TABLE Bitacora (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    FechaHora DATETIME NOT NULL,
+    Usuario NVARCHAR(100) NOT NULL,
+    Accion NVARCHAR(255) NOT NULL,
+    Detalle NVARCHAR(MAX) NULL
 );
-
--- Insertar algunos usuarios y roles de prueba
-INSERT INTO Usuarios (Username, Password)
-VALUES ('admin', 'admin123'), ('deposito', 'deposito123'), ('gerente', 'gerente123'), ('vendedor', 'vendedor123');
-
-INSERT INTO RolesUsuarios (UsuarioId, Rol)
-VALUES 
-    (1, 'Admin'),
-    (2, 'deposito'),
-    (3, 'gerente'),
-    (4, 'vendedor');
 ```
 
 ### 2. Configurar la Cadena de Conexión
 
-En el archivo `Program.cs` de `GestionLocalesTelefonia.UI`, actualiza la cadena de conexión a tu base de datos:
+En el archivo `Program.cs` de `GestionLocalesTelefonia.UI`, ajusta la cadena de conexión a tu base de datos:
 
 ```csharp
 string connectionString = "Server=tu_servidor;Database=GestionLocalesTelefoniaDB;Integrated Security=True;";
@@ -96,83 +87,21 @@ string connectionString = "Server=tu_servidor;Database=GestionLocalesTelefoniaDB
 ### 3. Ejecutar la Aplicación
 
 1. Abre la solución `GestionLocalesTelefonia.sln` en Visual Studio.
-2. Compila la solución para asegurarte de que todos los proyectos se compilan correctamente.
-3. Establece `GestionLocalesTelefonia.UI` como el proyecto de inicio.
+2. Compila la solución para asegurar que todos los proyectos se compilen correctamente.
+3. Establece el proyecto `GestionLocalesTelefonia.UI` como el proyecto de inicio.
 4. Ejecuta la aplicación.
 
-## Uso de la Aplicación
-
-1. **Inicio de Sesión**: Ingresa un nombre de usuario y contraseña.
-2. **Navegación por Rol**: Según el rol del usuario autenticado, la aplicación mostrará la interfaz correspondiente (`Home_deposito`, `Home_gerente`, `Home_vendedor`).
-
-## Patrones de Diseño Utilizados
-
-### 1. **Arquitectura en Capas (Layered Architecture)**
-   - Separa la aplicación en diferentes capas: Dominio, DAL, BLL y UI.
-
-### 2. **Patrón de Inyección de Dependencias (Dependency Injection)**
-   - Permite la inyección de dependencias, facilitando la prueba y mantenimiento del código.
-
-### 3. **Patrón de Fábrica (Factory)**
-   - La clase `RoleBasedUIFactory` en la BLL se utiliza para crear y devolver el manejador de UI adecuado según el rol del usuario autenticado.
-
-### 4. **Patrón Estrategia (Strategy)**
-   - Los manejadores de UI implementan la interfaz `IRoleBasedUI`, proporcionando diferentes implementaciones para diferentes roles de usuario.
-
-### 5. **Patrón de Repositorio (Repository Pattern)**
-   - `UsuarioRepository` en la DAL encapsula las operaciones de acceso a datos, proporcionando una interfaz limpia para `UsuarioService`.
-
-## Buenas Prácticas Seguidas
-
-### 1. **Separación de Responsabilidades (SoC)**
-   - Cada capa tiene responsabilidades claras y bien definidas.
-
-### 2. **Inversión de Control (IoC)**
-   - Implementada a través de la inyección de dependencias en `Program.cs`.
-
-### 3. **Modularidad**
-   - Los componentes son modulares y pueden ser desarrollados, testeados y mantenidos de manera independiente.
-
-### 4. **Facilidad de Pruebas**
-   - Las clases están diseñadas para ser fácilmente testeables, gracias a la inyección de dependencias y patrones de diseño.
-
-### 5. **Uso de Nombres Descriptivos**
-   - Los nombres de clases, métodos y variables son claros y reflejan su propósito.
-
-### 6. **Evitar Código Duplicado**
-   - La lógica compartida se centraliza, evitando duplicación de código.
-
-### 7. **Gestión de Errores**
-   - Implementada para proporcionar retroalimentación adecuada al usuario y prevenir fallos en el sistema.
-
-## Próximos Pasos
-
-- **Gestión de Productos**: Agregar funcionalidad para gestionar productos en el inventario.
-- **Módulo de Ventas**: Implementar la funcionalidad para gestionar las ventas y generar reportes.
-- **Seguridad**: Implementar hashing de contraseñas y mejorar las validaciones de seguridad.
-
-## Contribución
+## Contribuciones
 
 Si deseas contribuir a este proyecto, sigue los pasos a continuación:
 
 1. **Fork** el repositorio.
 2. Crea una nueva rama (`feature/nueva-funcionalidad`).
-3. Realiza tus cambios y confirma los commits.
-4. Abre un **Pull Request** para revisión.
+3. Realiza tus cambios y confirma (`git commit -m 'Añadir nueva funcionalidad'`).
+4. Haz un **push** a la rama (`git push origin feature/nueva-funcionalidad`).
+5. Abre un **Pull Request**.
 
 ## Licencia
 
-Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-## Contacto
-
-Para cualquier consulta, puedes contactarme en [tu-email@dominio.com].
-```
-
-### Instrucciones para Usar el `README.md`
-
-1. **Crea un archivo `README.md`** en la raíz de tu proyecto.
-2. **Copia y pega** el contenido proporcionado en este archivo.
-3. **Ajusta** cualquier detalle específico, como el nombre del servidor, correo electrónico u otros aspectos de configuración que sean únicos para tu entorno.
-
-Este archivo `README.md` refleja la estructura y las prácticas actuales del proyecto, proporcionando una guía clara sobre cómo configurarlo, ejecutarlo, y las decisiones arquitectónicas clave que se tomaron. Si necesitas más ajustes o información adicional, ¡estoy aquí para ayudarte!
