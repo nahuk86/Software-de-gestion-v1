@@ -40,3 +40,4 @@ C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Home_deposito.resources
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Home_gerente.resources
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Forms.Forms_gerente.form_crear_usuario.resources
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Forms.Forms_deposito.alta_producto.resources
