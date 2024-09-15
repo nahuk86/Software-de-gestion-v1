@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArqBase.Domain
+namespace Servicios.Domain
 {
     public class Bitacora
     {

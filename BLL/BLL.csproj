@@ -53,9 +53,9 @@
     <Compile Include="Validators\ClienteValidator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ArqBase\ArqBase.csproj">
+    <ProjectReference Include="..\ArqBase\Servicios.csproj">
       <Project>{0cd74aa9-83be-4eef-ad24-dc180aef5c49}</Project>
-      <Name>ArqBase</Name>
+      <Name>Servicios</Name>
     </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{c7f29b24-20fa-4d37-b816-60cdbdef015d}</Project>

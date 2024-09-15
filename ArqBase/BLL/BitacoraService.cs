@@ -1,12 +1,12 @@
-﻿using ArqBase.DAL.Repositories;
-using ArqBase.Domain;
+﻿using Servicios.DAL.Repositories;
+using Servicios.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArqBase.BLL
+namespace Servicios.BLL
 {
     public class BitacoraService
     {

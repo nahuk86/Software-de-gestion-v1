@@ -1,4 +1,4 @@
-﻿using ArqBase.Domain;
+﻿using Servicios.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArqBase.DAL.Repositories
+namespace Servicios.DAL.Repositories
 {
     public class BitacoraRepository
     {

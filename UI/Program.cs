@@ -11,7 +11,7 @@ using UI.Forms.Forms_vendedor;
 using System.Configuration;
 using System.Data.Common;
 using UI.Forms.Forms_gerente;
-using ArqBase.BLL;
+using Servicios.BLL;
 
 namespace UI
 {
@@ -29,18 +29,23 @@ namespace UI
             var depositoUIHandler = new DepositoUIHandler();
             var gerenteUIHandler = new GerenteUIHandler();
             var vendedorUIHandler = new VendedorUIHandler();
+            var usuarioService = new UsuarioService();
 
-            IClienteService clienteService = new ClienteService(connectionString);
+
 
             // Crear la instancia de la fábrica de UI
             var uiFactory = new RoleBasedUIFactory(depositoUIHandler, gerenteUIHandler, vendedorUIHandler);
 
             // Configuración manual de la cadena de conexión
-            var usuarioService = new UsuarioService();
             var bitacoraService = new BitacoraService(connectionString);
 
             // Iniciar la aplicación con la pantalla de inicio de sesión
+
+            IClienteService clienteService = new ClienteService(connectionString, usuarioService); // Pasamos el objeto usuarioService
+
             var loginForm = new Pantalla_inicio(usuarioService, uiFactory, clienteService);
+
+
             Application.Run(loginForm);
 
             //var loginForm = new form_crear_usuario();

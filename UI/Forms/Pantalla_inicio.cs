@@ -78,7 +78,7 @@ namespace UI
                     if (rolUsuario == "Vendedor") // O cualquier otro rol que necesite ClienteService
                     {
                         var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-                        IClienteService clienteService = new ClienteService(connectionString);
+                        IClienteService clienteService = new ClienteService(connectionString, _usuarioService); // Pasamos también _usuarioService
                         uiHandler.MostrarUI(clienteService);
                     }
                     else

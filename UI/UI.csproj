@@ -138,9 +138,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ArqBase\ArqBase.csproj">
+    <ProjectReference Include="..\ArqBase\Servicios.csproj">
       <Project>{0cd74aa9-83be-4eef-ad24-dc180aef5c49}</Project>
-      <Name>ArqBase</Name>
+      <Name>Servicios</Name>
     </ProjectReference>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{f5d33a24-f467-4735-a182-8140cbe6ea59}</Project>

@@ -7,11 +7,11 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using ArqBase;
+using Servicios;
 using DAL.Repositories;
 using System.Configuration;
 using BLL.DTOs;
-using ArqBase.BLL;
+using Servicios.BLL;
 
 
 
@@ -21,6 +21,7 @@ namespace BLL
     {
         private readonly UsuarioRepository _usuarioRepository;
         private readonly BitacoraService _bitacoraService;
+        public static string _usuarioActual;
 
 
         public UsuarioService()
@@ -48,8 +49,17 @@ namespace BLL
             // Verificar la contraseña encriptada
             bool isValid = PasswordHasher.VerifyPassword(password, usuario.Password);
             Console.WriteLine("Password Valid: " + isValid);
+            if (isValid)
+            {
+                _usuarioActual = username; // Guardar el nombre de usuario
+            }
 
             return isValid;
+        }
+
+        public string ObtenerUsuarioActual()
+        {
+            return _usuarioActual;
         }
 
         // Método para obtener el rol de un usuario
@@ -76,10 +86,10 @@ namespace BLL
                 DNI = usuarioDTO.DNI,
                 Rol = usuarioDTO.Rol
             };
-
+            _usuarioActual = ObtenerUsuarioActual();
             // Guardar el usuario en la base de datos
             _usuarioRepository.CrearUsuario(usuario);
-            _bitacoraService.Registrar(usuario.Username, "Creación de usuario", $"Usuario {usuario.Username} creado con rol {usuario.Rol}");
+            _bitacoraService.Registrar(_usuarioActual, "Creación de usuario", $"Usuario {usuario.Username} creado con rol {usuario.Rol}");
 
         }
 
