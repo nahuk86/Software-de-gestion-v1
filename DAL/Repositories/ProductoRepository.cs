@@ -1,4 +1,5 @@
 ﻿using DAL.Helpers;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -8,56 +9,85 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class ProductoDAL
+    public class ProductoRepository
     {
         private string connectionString = ConfigHelper.GetConnectionString();
 
-        public List<string> GetCategorias()
+        public void AgregarProducto(Producto producto)
         {
-            List<string> categorias = new List<string>();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT Nombre FROM Categoria";
+                string query = "INSERT INTO Producto (Nombre, IdCategoria, IdProveedor, IdMarca, ValorUnitario) VALUES (@Nombre, @IdCategoria, @IdProveedor, @IdMarca, @ValorUnitario)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Nombre", producto.Nombre);
+                cmd.Parameters.AddWithValue("@IdCategoria", producto.IdCategoria);
+                cmd.Parameters.AddWithValue("@IdProveedor", producto.IdProveedor);
+                cmd.Parameters.AddWithValue("@IdMarca", producto.IdMarca);
+                cmd.Parameters.AddWithValue("@ValorUnitario", producto.ValorUnitario);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public List<Categoria> ObtenerCategorias()
+        {
+            List<Categoria> categorias = new List<Categoria>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT Id, Nombre FROM Categoria";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    categorias.Add(reader["Nombre"].ToString());
+                    categorias.Add(new Categoria
+                    {
+                        Id = (int)reader["Id"],
+                        Nombre = (string)reader["Nombre"]
+                    });
                 }
             }
             return categorias;
         }
 
-        public List<string> GetProveedores()
+        public List<Proveedor> ObtenerProveedores()
         {
-            List<string> proveedores = new List<string>();
+            List<Proveedor> proveedores = new List<Proveedor>();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT Nombre FROM Proveedor";
+                string query = "SELECT Id, Nombre FROM Proveedor";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    proveedores.Add(reader["Nombre"].ToString());
+                    proveedores.Add(new Proveedor
+                    {
+                        Id = (int)reader["Id"],
+                        Nombre = (string)reader["Nombre"]
+                    });
                 }
             }
             return proveedores;
         }
 
-        public List<string> GetMarcas()
+        public List<Marca> ObtenerMarcas()
         {
-            List<string> marcas = new List<string>();
+            List<Marca> marcas = new List<Marca>();
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT Nombre FROM Marca";
+                string query = "SELECT Id, Nombre FROM Marca";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    marcas.Add(reader["Nombre"].ToString());
+                    marcas.Add(new Marca
+                    {
+                        Id = (int)reader["Id"],
+                        Nombre = (string)reader["Nombre"]
+                    });
                 }
             }
             return marcas;

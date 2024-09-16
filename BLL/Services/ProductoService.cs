@@ -1,7 +1,7 @@
 ﻿using BLL.Interfaces;
 using DAL.Repositories;
 using Domain;
-using Domain.DTOs;
+using BLL.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +13,58 @@ namespace BLL.Services
 {
     public class ProductoService
     {
-        private ProductoDAL productoDAL = new ProductoDAL();
+        private ProductoRepository productoRepository = new ProductoRepository();
 
-        public List<string> ObtenerCategorias()
+        public void AgregarProducto(ProductoDTO productoDTO)
         {
-            return productoDAL.GetCategorias();
+            // Convertir ProductoDTO a Producto (entidad del dominio)
+            var producto = new Producto
+            {
+                Nombre = productoDTO.Nombre,
+                IdCategoria = productoDTO.IdCategoria,
+                IdProveedor = productoDTO.IdProveedor,
+                IdMarca = productoDTO.IdMarca,
+                ValorUnitario = productoDTO.ValorUnitario
+            };
+
+            // Validar los datos
+            if (string.IsNullOrWhiteSpace(producto.Nombre))
+                throw new ArgumentException("El nombre del producto no puede estar vacío.");
+            if (producto.ValorUnitario <= 0)
+                throw new ArgumentException("El valor unitario debe ser mayor que cero.");
+
+            // Llamar a la capa DAL para agregar el producto
+            productoRepository.AgregarProducto(producto);
         }
 
-        public List<string> ObtenerProveedores()
+        public List<CategoriaDTO> ObtenerCategorias()
         {
-            return productoDAL.GetProveedores();
+            var categorias = productoRepository.ObtenerCategorias();
+            return categorias.ConvertAll(c => new CategoriaDTO
+            {
+                Id = c.Id,
+                Nombre = c.Nombre
+            });
         }
 
-        public List<string> ObtenerMarcas()
+        public List<ProveedorDTO> ObtenerProveedores()
         {
-            return productoDAL.GetMarcas();
+            var proveedores = productoRepository.ObtenerProveedores();
+            return proveedores.ConvertAll(p => new ProveedorDTO
+            {
+                Id = p.Id,
+                Nombre = p.Nombre
+            });
+        }
+
+        public List<MarcaDTO> ObtenerMarcas()
+        {
+            var marcas = productoRepository.ObtenerMarcas();
+            return marcas.ConvertAll(m => new MarcaDTO
+            {
+                Id = m.Id,
+                Nombre = m.Nombre
+            });
         }
     }
 }
