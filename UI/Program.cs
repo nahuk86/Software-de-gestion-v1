@@ -32,7 +32,6 @@ namespace UI
             var usuarioService = new UsuarioService();
 
 
-
             // Crear la instancia de la fábrica de UI
             var uiFactory = new RoleBasedUIFactory(depositoUIHandler, gerenteUIHandler, vendedorUIHandler);
 
@@ -48,11 +47,6 @@ namespace UI
 
             Application.Run(loginForm);
 
-            //var loginForm = new form_crear_usuario();
-            //Application.Run(loginForm);
-
-            // Una vez que Pantalla_inicio se cierre, podrías abrir otro formulario según sea necesario.
-            // Sin embargo, no debes llamar a Application.Run más de una vez.
         }
     }
 }

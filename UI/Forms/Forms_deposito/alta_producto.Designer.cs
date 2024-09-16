@@ -37,6 +37,8 @@
             this.comboBox_marca_producto = new System.Windows.Forms.ComboBox();
             this.comboBox_proveedor_producto = new System.Windows.Forms.ComboBox();
             this.button_agregar_producto = new System.Windows.Forms.Button();
+            this.comboBox_categoria_producto = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox_nombre_producto
@@ -48,7 +50,7 @@
             // 
             // textBox_valor_unitario_producto
             // 
-            this.textBox_valor_unitario_producto.Location = new System.Drawing.Point(234, 187);
+            this.textBox_valor_unitario_producto.Location = new System.Drawing.Point(234, 238);
             this.textBox_valor_unitario_producto.Name = "textBox_valor_unitario_producto";
             this.textBox_valor_unitario_producto.Size = new System.Drawing.Size(196, 22);
             this.textBox_valor_unitario_producto.TabIndex = 3;
@@ -84,9 +86,9 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(63, 187);
+            this.label4.Location = new System.Drawing.Point(63, 238);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 20);
+            this.label4.Size = new System.Drawing.Size(88, 16);
             this.label4.TabIndex = 7;
             this.label4.Text = "Valor Unitario";
             // 
@@ -108,18 +110,40 @@
             // 
             // button_agregar_producto
             // 
-            this.button_agregar_producto.Location = new System.Drawing.Point(293, 254);
+            this.button_agregar_producto.Location = new System.Drawing.Point(293, 327);
             this.button_agregar_producto.Name = "button_agregar_producto";
             this.button_agregar_producto.Size = new System.Drawing.Size(137, 52);
             this.button_agregar_producto.TabIndex = 10;
             this.button_agregar_producto.Text = "Agregar nuevo producto";
             this.button_agregar_producto.UseVisualStyleBackColor = true;
+            this.button_agregar_producto.Click += new System.EventHandler(this.button_agregar_producto_Click);
+            // 
+            // comboBox_categoria_producto
+            // 
+            this.comboBox_categoria_producto.FormattingEnabled = true;
+            this.comboBox_categoria_producto.Location = new System.Drawing.Point(234, 188);
+            this.comboBox_categoria_producto.Name = "comboBox_categoria_producto";
+            this.comboBox_categoria_producto.Size = new System.Drawing.Size(196, 24);
+            this.comboBox_categoria_producto.TabIndex = 12;
+            this.comboBox_categoria_producto.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(63, 188);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(83, 20);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Categoria";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // alta_producto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 358);
+            this.ClientSize = new System.Drawing.Size(455, 441);
+            this.Controls.Add(this.comboBox_categoria_producto);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.button_agregar_producto);
             this.Controls.Add(this.comboBox_proveedor_producto);
             this.Controls.Add(this.comboBox_marca_producto);
@@ -147,5 +171,7 @@
         private System.Windows.Forms.ComboBox comboBox_marca_producto;
         private System.Windows.Forms.ComboBox comboBox_proveedor_producto;
         private System.Windows.Forms.Button button_agregar_producto;
+        private System.Windows.Forms.ComboBox comboBox_categoria_producto;
+        private System.Windows.Forms.Label label5;
     }
 }

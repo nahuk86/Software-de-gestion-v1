@@ -46,6 +46,7 @@
     <Compile Include="DTOs\UsuarioDTO.cs" />
     <Compile Include="Interfaces\IClienteService.cs" />
     <Compile Include="Services\ClienteService.cs" />
+    <Compile Include="Services\ProductoService.cs" />
     <Compile Include="UIHandlers\RoleBasedUIFactory.cs" />
     <Compile Include="Interfaces\IRoleBasedUI.cs" />
     <Compile Include="Services\UsuarioService.cs" />

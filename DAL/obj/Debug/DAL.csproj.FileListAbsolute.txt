@@ -18,3 +18,5 @@ C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\obj\Debug\D
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\obj\Debug\DAL.pdb
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\bin\Debug\ArqBase.dll
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\bin\Debug\ArqBase.pdb
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\DAL\bin\Debug\System.Configuration.ConfigurationManager.xml
