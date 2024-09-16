@@ -36,7 +36,6 @@ namespace UI
             var uiFactory = new RoleBasedUIFactory(depositoUIHandler, gerenteUIHandler, vendedorUIHandler);
 
             // Configuración manual de la cadena de conexión
-            var bitacoraService = new BitacoraService(connectionString);
 
             // Iniciar la aplicación con la pantalla de inicio de sesión
 

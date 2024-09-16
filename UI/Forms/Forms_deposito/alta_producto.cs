@@ -10,18 +10,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BLL;
+using Servicios.BLL;
+using Servicios.DAL.Repositories;
 
 namespace UI.Forms.Forms_deposito
 {
     public partial class alta_producto : Form
     {
         private ProductoService productoService;
+        private BitacoraService bitacoraService;
+        private UsuarioService usuarioService;
 
 
         public alta_producto()
         {
             InitializeComponent();
-            productoService = new ProductoService(); // Crear una instancia de ProductoBLL
+            // Crear instancia de BitacoraRepository
+            BitacoraRepository bitacoraRepository = new BitacoraRepository();
+
+            // Crear instancia de BitacoraService con el repositorio
+            bitacoraService = new BitacoraService(bitacoraRepository);
+
+            // Crear instancia de UsuarioService (Asegúrate de que UsuarioService esté correctamente definido)
+            usuarioService = new UsuarioService();
+
+            // Crear instancia de ProductoService con las dependencias
+            productoService = new ProductoService(bitacoraService, usuarioService);
+
             CargarDatos();
         }
         private void CargarDatos()
@@ -81,6 +97,11 @@ namespace UI.Forms.Forms_deposito
             {
                 MessageBox.Show($"Error al agregar el producto: {ex.Message}");
             }
+        }
+
+        private void alta_producto_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -60,7 +60,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(63, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(165, 20);
+            this.label1.Size = new System.Drawing.Size(132, 16);
             this.label1.TabIndex = 4;
             this.label1.Text = "Nombre de Producto";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -79,7 +79,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(63, 135);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 20);
+            this.label3.Size = new System.Drawing.Size(71, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "Proveedor";
             // 
@@ -132,7 +132,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(63, 188);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 20);
+            this.label5.Size = new System.Drawing.Size(66, 16);
             this.label5.TabIndex = 11;
             this.label5.Text = "Categoria";
             this.label5.Click += new System.EventHandler(this.label5_Click);
@@ -155,6 +155,7 @@
             this.Controls.Add(this.textBox_nombre_producto);
             this.Name = "alta_producto";
             this.Text = "alta_producto";
+            this.Load += new System.EventHandler(this.alta_producto_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

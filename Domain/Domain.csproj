@@ -43,11 +43,7 @@
   <ItemGroup>
     <Compile Include="Categoria.cs" />
     <Compile Include="ClienteBuilder.cs" />
-    <Compile Include="DTOs\CategoriaDTO.cs" />
     <Compile Include="DTOs\ClienteDTO.cs" />
-    <Compile Include="DTOs\MarcaDTO.cs" />
-    <Compile Include="DTOs\ProductoDTO.cs" />
-    <Compile Include="DTOs\ProveedorDTO.cs" />
     <Compile Include="Marca.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="Proveedor.cs" />

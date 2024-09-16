@@ -25,7 +25,6 @@ namespace BLL.Services
         public ClienteService(string connectionString, UsuarioService usuarioService)
         {
             _clienteRepository = new ClienteRepository(connectionString); // DAL manejada dentro de BLL
-            _bitacoraService = new BitacoraService(connectionString);
             _usuarioService = usuarioService ?? throw new ArgumentNullException(nameof(usuarioService));
 
         }

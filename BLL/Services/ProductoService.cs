@@ -8,13 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Servicios.BLL;
 
 namespace BLL.Services
 {
     public class ProductoService
     {
         private ProductoRepository productoRepository = new ProductoRepository();
+        private readonly BitacoraService _bitacoraService;
+        private readonly UsuarioService _usuarioService;
 
+
+        public ProductoService(BitacoraService bitacoraService, UsuarioService usuarioService)
+        {
+            _bitacoraService = bitacoraService ?? throw new ArgumentNullException(nameof(bitacoraService));
+            _usuarioService = usuarioService ?? throw new ArgumentNullException(nameof(usuarioService));
+        }
         public void AgregarProducto(ProductoDTO productoDTO)
         {
             // Convertir ProductoDTO a Producto (entidad del dominio)
@@ -35,6 +44,9 @@ namespace BLL.Services
 
             // Llamar a la capa DAL para agregar el producto
             productoRepository.AgregarProducto(producto);
+            string usuarioActual = _usuarioService.ObtenerUsuarioActual();
+            _bitacoraService.Registrar(usuarioActual, "Creación de producto", $"EL producto id {producto.Id} con nombre {producto.Nombre} fue creado");
+
         }
 
         public List<CategoriaDTO> ObtenerCategorias()

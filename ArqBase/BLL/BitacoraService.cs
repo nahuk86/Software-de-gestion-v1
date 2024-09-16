@@ -12,9 +12,9 @@ namespace Servicios.BLL
     {
         private readonly BitacoraRepository _bitacoraRepository;
 
-        public BitacoraService(string connectionString)
+        public BitacoraService(BitacoraRepository bitacoraRepository)
         {
-            _bitacoraRepository = new BitacoraRepository(connectionString);
+            _bitacoraRepository = bitacoraRepository ?? throw new ArgumentNullException(nameof(bitacoraRepository));
         }
 
         public void Registrar(string usuario, string accion, string detalle = null)

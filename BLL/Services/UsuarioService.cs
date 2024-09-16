@@ -28,7 +28,6 @@ namespace BLL
         {
             var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             _usuarioRepository = new UsuarioRepository(connectionString);
-            _bitacoraService = new BitacoraService(connectionString);
         }
 
         // Método para autenticar un usuario

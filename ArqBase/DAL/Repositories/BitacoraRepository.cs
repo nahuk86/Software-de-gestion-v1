@@ -1,4 +1,5 @@
-﻿using Servicios.Domain;
+﻿using ArqBase.DAL.Helper;
+using Servicios.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,26 +11,21 @@ namespace Servicios.DAL.Repositories
 {
     public class BitacoraRepository
     {
-        private readonly string _connectionString;
-
-        public BitacoraRepository(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
+        private string connectionString = ConfigHelper.GetConnectionString();
 
         public void RegistrarEnBitacora(Bitacora bitacora)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = "INSERT INTO Bitacora (FechaHora, Usuario, Accion, Detalle) " +
                                "VALUES (@FechaHora, @Usuario, @Accion, @Detalle)";
-                SqlCommand command = new SqlCommand(query, connection);
+                SqlCommand command = new SqlCommand(query, conn);
                 command.Parameters.AddWithValue("@FechaHora", bitacora.FechaHora);
                 command.Parameters.AddWithValue("@Usuario", bitacora.Usuario);
                 command.Parameters.AddWithValue("@Accion", bitacora.Accion);
                 command.Parameters.AddWithValue("@Detalle", bitacora.Detalle ?? (object)DBNull.Value);
 
-                connection.Open();
+                conn.Open();
                 command.ExecuteNonQuery();
             }
         }
