@@ -39,6 +39,7 @@
             this.button_agregar_producto = new System.Windows.Forms.Button();
             this.comboBox_categoria_producto = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btn_agregar_marca = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox_nombre_producto
@@ -137,11 +138,22 @@
             this.label5.Text = "Categoria";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
+            // btn_agregar_marca
+            // 
+            this.btn_agregar_marca.Location = new System.Drawing.Point(474, 81);
+            this.btn_agregar_marca.Name = "btn_agregar_marca";
+            this.btn_agregar_marca.Size = new System.Drawing.Size(121, 32);
+            this.btn_agregar_marca.TabIndex = 13;
+            this.btn_agregar_marca.Text = "Agregar Marca";
+            this.btn_agregar_marca.UseVisualStyleBackColor = true;
+            this.btn_agregar_marca.Click += new System.EventHandler(this.btn_agregar_marca_Click);
+            // 
             // alta_producto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 441);
+            this.ClientSize = new System.Drawing.Size(607, 441);
+            this.Controls.Add(this.btn_agregar_marca);
             this.Controls.Add(this.comboBox_categoria_producto);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button_agregar_producto);
@@ -174,5 +186,6 @@
         private System.Windows.Forms.Button button_agregar_producto;
         private System.Windows.Forms.ComboBox comboBox_categoria_producto;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btn_agregar_marca;
     }
 }

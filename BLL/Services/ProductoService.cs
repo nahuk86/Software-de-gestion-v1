@@ -9,21 +9,28 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Servicios.BLL;
+using BLL.Factory;
 
 namespace BLL.Services
 {
     public class ProductoService
     {
-        private ProductoRepository productoRepository = new ProductoRepository();
+        private ProductoRepository productoRepository;
+        private MarcaRepository marcaRepository;
         private readonly BitacoraService _bitacoraService;
         private readonly UsuarioService _usuarioService;
-
 
         public ProductoService(BitacoraService bitacoraService, UsuarioService usuarioService)
         {
             _bitacoraService = bitacoraService ?? throw new ArgumentNullException(nameof(bitacoraService));
             _usuarioService = usuarioService ?? throw new ArgumentNullException(nameof(usuarioService));
+
+            // Inicializa el repositorio
+            productoRepository = new ProductoRepository();
+            _entidadFactory = new EntidadFactory();
+            marcaRepository = new MarcaRepository();
         }
+
         public void AgregarProducto(ProductoDTO productoDTO)
         {
             // Convertir ProductoDTO a Producto (entidad del dominio)
@@ -78,5 +85,46 @@ namespace BLL.Services
                 Nombre = m.Nombre
             });
         }
+
+        private EntidadFactory _entidadFactory;
+
+        public ProductoService()
+        {
+            _entidadFactory = new EntidadFactory();
+        }
+
+        public void AgregarMarca(string nombre)
+        {
+
+            if (productoRepository == null)
+            {
+                throw new InvalidOperationException("El repositorio de productos no está inicializado.");
+            }
+
+            var nuevaMarca = (Marca)_entidadFactory.CrearEntidad("Marca");
+            nuevaMarca.Nombre = nombre;
+
+            // Llamar a la capa DAL para guardar la nueva marca
+            marcaRepository.AgregarMarca(nuevaMarca);
+        }
+
+        public void AgregarProveedor(string nombre)
+        {
+            var nuevoProveedor = (Proveedor)_entidadFactory.CrearEntidad("Proveedor");
+            nuevoProveedor.Nombre = nombre;
+
+            // Lógica para guardar el proveedor en la base de datos
+            // productoRepository.AgregarProveedor(nuevoProveedor);
+        }
+
+        public void AgregarCategoria(string nombre)
+        {
+            var nuevaCategoria = (Categoria)_entidadFactory.CrearEntidad("Categoria");
+            nuevaCategoria.Nombre = nombre;
+
+            // Lógica para guardar la categoría en la base de datos
+            // productoRepository.AgregarCategoria(nuevaCategoria);
+        }
+
     }
 }

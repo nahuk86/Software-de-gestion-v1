@@ -44,6 +44,7 @@
     <Compile Include="Categoria.cs" />
     <Compile Include="ClienteBuilder.cs" />
     <Compile Include="DTOs\ClienteDTO.cs" />
+    <Compile Include="Interfaces\IEntidad.cs" />
     <Compile Include="Marca.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="Proveedor.cs" />

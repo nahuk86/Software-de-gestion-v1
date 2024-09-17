@@ -5,16 +5,35 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Helpers;
 
 namespace DAL.Repositories
 {
     public class MarcaRepository
     {
-        private readonly string _connectionString;
+        private string connectionString = ConfigHelper.GetConnectionString();
 
-        public MarcaRepository(string connectionString)
+        public MarcaRepository()
         {
-            _connectionString = connectionString;
+
+        }
+
+        public void AgregarMarca(Marca marca)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("INSERT INTO Marca (Nombre) VALUES (@Nombre)", conn);
+                    cmd.Parameters.AddWithValue("@Nombre", marca.Nombre);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error al agregar la marca", ex);
+            }
         }
 
         public List<Marca> ObtenerMarcas()
@@ -23,7 +42,7 @@ namespace DAL.Repositories
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(_connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     SqlCommand cmd = new SqlCommand("SELECT Id, Nombre FROM Marca", conn);
                     conn.Open();

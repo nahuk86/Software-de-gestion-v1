@@ -53,6 +53,12 @@
     <Compile Include="Forms\Forms_deposito\alta_producto.Designer.cs">
       <DependentUpon>alta_producto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Forms_deposito\gestion_marca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Forms_deposito\gestion_marca.Designer.cs">
+      <DependentUpon>gestion_marca.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Forms_gerente\form_crear_usuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     <Compile Include="UIHandlers\VendedorUIHandler.cs" />
     <EmbeddedResource Include="Forms\Forms_deposito\alta_producto.resx">
       <DependentUpon>alta_producto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Forms_deposito\gestion_marca.resx">
+      <DependentUpon>gestion_marca.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Forms_gerente\form_crear_usuario.resx">
       <DependentUpon>form_crear_usuario.cs</DependentUpon>

@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using BLL;
 using Servicios.BLL;
 using Servicios.DAL.Repositories;
+using UI.Forms.Forms_vendedor;
 
 namespace UI.Forms.Forms_deposito
 {
@@ -101,6 +102,21 @@ namespace UI.Forms.Forms_deposito
 
         private void alta_producto_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void btn_agregar_marca_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+            // Create an instance of agregar_marca form
+            gestion_marca agregarMarcaForm = new gestion_marca();
+
+            // Set the MdiParent to the Home_deposito MDI parent form
+            agregarMarcaForm.MdiParent = this.MdiParent;
+
+            // Show the agregar_marca form
+            agregarMarcaForm.Show();
 
         }
     }

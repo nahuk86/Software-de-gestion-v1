@@ -48,6 +48,7 @@
     <Compile Include="DTOs\ProductoDTO.cs" />
     <Compile Include="DTOs\ProveedorDTO.cs" />
     <Compile Include="DTOs\UsuarioDTO.cs" />
+    <Compile Include="Factory\EntidadFactory.cs" />
     <Compile Include="Interfaces\IClienteService.cs" />
     <Compile Include="Services\ClienteService.cs" />
     <Compile Include="Services\ProductoService.cs" />

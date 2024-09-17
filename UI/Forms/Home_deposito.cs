@@ -14,6 +14,8 @@ namespace UI
 {
     public partial class Home_deposito : Form
     {
+        public Panel panelContenedor { get; private set; }
+
         public Home_deposito()
         {
             InitializeComponent();
@@ -33,8 +35,21 @@ namespace UI
         private void crearNuevoProductoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             alta_producto formHijo = new alta_producto();
-            formHijo.MdiParent = this;  // Configura el formulario padre
+            formHijo.MdiParent = this;  // Asignar MdiParent
             formHijo.Show();
+        }
+
+        public void CambiarFormulario(Form nuevoForm)
+        {
+            // Cerrar todos los formularios hijos
+            foreach (Form frm in this.MdiChildren)
+            {
+                frm.Close();
+            }
+
+            // Configurar y abrir el nuevo formulario
+            nuevoForm.MdiParent = this;
+            nuevoForm.Show();
         }
     }
 }
