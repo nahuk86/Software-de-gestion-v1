@@ -116,5 +116,18 @@ namespace UI.Forms.Forms_deposito
             // Show the agregar_marca form
             agregarCategoriaForm.Show();
         }
+
+        private void btn_agregar_proveedor_Click(object sender, EventArgs e)
+        {
+            alta_proveedor agregarProveedorForm = new alta_proveedor();
+
+            agregarProveedorForm.MarcaAgregada += (s, args) => FormHelper.CargarDatos(productoService, comboBox_categoria_producto, comboBox_proveedor_producto, comboBox_marca_producto);
+
+            // Set the MdiParent to the Home_deposito MDI parent form
+            agregarProveedorForm.MdiParent = this.MdiParent;
+
+            // Show the agregar_marca form
+            agregarProveedorForm.Show();
+        }
     }
 }

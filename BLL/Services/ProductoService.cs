@@ -20,6 +20,7 @@ namespace BLL.Services
         private readonly BitacoraService _bitacoraService;
         private readonly UsuarioService _usuarioService;
         private CategoriaRepository categoriaRepository;
+        private ProveedorRepository proveedorRepository;
 
         public ProductoService(BitacoraService bitacoraService, UsuarioService usuarioService)
         {
@@ -31,6 +32,7 @@ namespace BLL.Services
             _entidadFactory = new EntidadFactory();
             marcaRepository = new MarcaRepository();
             categoriaRepository = new CategoriaRepository();
+            proveedorRepository = new ProveedorRepository();
         }
 
         public void AgregarProducto(ProductoDTO productoDTO)
@@ -114,7 +116,7 @@ namespace BLL.Services
         {
             var nuevoProveedor = (Proveedor)_entidadFactory.CrearEntidad("Proveedor");
             nuevoProveedor.Nombre = nombre;
-
+            proveedorRepository.AgregarProveedor(nuevoProveedor);
             // Lógica para guardar el proveedor en la base de datos
             // productoRepository.AgregarProveedor(nuevoProveedor);
         }

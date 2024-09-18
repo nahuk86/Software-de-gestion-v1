@@ -5,17 +5,36 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Helpers;
 
 namespace DAL.Repositories
 {
     public class ProveedorRepository
     {
-        private readonly string _connectionString;
+        private string connectionString = ConfigHelper.GetConnectionString();
 
-        public ProveedorRepository(string connectionString)
+        public ProveedorRepository()
         {
-            _connectionString = connectionString;
         }
+
+        public void AgregarProveedor(Proveedor proveedor)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("INSERT INTO Proveedor (Nombre) VALUES (@Nombre)", conn);
+                    cmd.Parameters.AddWithValue("@Nombre", proveedor.Nombre);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error al agregar el proveedor", ex);
+            }
+        }
+
 
         public List<Proveedor> ObtenerProveedores()
         {
@@ -23,7 +42,7 @@ namespace DAL.Repositories
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(_connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     SqlCommand cmd = new SqlCommand("SELECT Id, Nombre FROM Proveedor", conn);
                     conn.Open();

@@ -43,3 +43,4 @@ C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Forms.Forms_deposito.alta_producto.resources
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Forms.Forms_deposito.gestion_marca.resources
 C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Forms.Forms_deposito.alta_categoria.resources
+C:\Users\nahue\OneDrive\Documentos\GitHub\Software-de-gestion-v1\UI\obj\Debug\UI.Forms.Forms_deposito.alta_proveedor.resources

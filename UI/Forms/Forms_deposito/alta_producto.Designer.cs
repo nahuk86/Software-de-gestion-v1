@@ -168,6 +168,7 @@
             this.btn_agregar_proveedor.TabIndex = 15;
             this.btn_agregar_proveedor.Text = "Agregar Proveedor";
             this.btn_agregar_proveedor.UseVisualStyleBackColor = true;
+            this.btn_agregar_proveedor.Click += new System.EventHandler(this.btn_agregar_proveedor_Click);
             // 
             // alta_producto
             // 
