@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Forms_deposito\alta_categoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Forms_deposito\alta_categoria.Designer.cs">
+      <DependentUpon>alta_categoria.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Forms_deposito\alta_producto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,7 @@
     <Compile Include="Forms\Forms_vendedor\registrar_venta.Designer.cs">
       <DependentUpon>registrar_venta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\helpers\FormHelper.cs" />
     <Compile Include="Forms\Home_deposito.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +113,9 @@
     <Compile Include="UIHandlers\DepositoUIHandler.cs" />
     <Compile Include="UIHandlers\GerenteUIHandler.cs" />
     <Compile Include="UIHandlers\VendedorUIHandler.cs" />
+    <EmbeddedResource Include="Forms\Forms_deposito\alta_categoria.resx">
+      <DependentUpon>alta_categoria.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Forms_deposito\alta_producto.resx">
       <DependentUpon>alta_producto.cs</DependentUpon>
     </EmbeddedResource>

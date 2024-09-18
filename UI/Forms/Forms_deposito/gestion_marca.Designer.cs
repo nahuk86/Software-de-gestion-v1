@@ -43,7 +43,7 @@
             // 
             this.btn_agregar_marca.Location = new System.Drawing.Point(173, 83);
             this.btn_agregar_marca.Name = "btn_agregar_marca";
-            this.btn_agregar_marca.Size = new System.Drawing.Size(120, 23);
+            this.btn_agregar_marca.Size = new System.Drawing.Size(120, 34);
             this.btn_agregar_marca.TabIndex = 1;
             this.btn_agregar_marca.Text = "Agregar Marca";
             this.btn_agregar_marca.UseVisualStyleBackColor = true;

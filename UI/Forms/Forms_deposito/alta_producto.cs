@@ -14,6 +14,7 @@ using BLL;
 using Servicios.BLL;
 using Servicios.DAL.Repositories;
 using UI.Forms.Forms_vendedor;
+using UI.Forms.helpers;
 
 namespace UI.Forms.Forms_deposito
 {
@@ -39,27 +40,11 @@ namespace UI.Forms.Forms_deposito
             // Crear instancia de ProductoService con las dependencias
             productoService = new ProductoService(bitacoraService, usuarioService);
 
-            CargarDatos();
-        }
-        private void CargarDatos()
-        {
-            var categorias = productoService.ObtenerCategorias();
-            comboBox_categoria_producto.DataSource = categorias;
-            comboBox_categoria_producto.DisplayMember = "Nombre";
-            comboBox_categoria_producto.ValueMember = "Id";
+            // Llamar al método de la clase FormHelper
+            FormHelper.CargarDatos(productoService, comboBox_categoria_producto, comboBox_proveedor_producto, comboBox_marca_producto);
 
-            // Cargar Proveedores
-            var proveedores = productoService.ObtenerProveedores();
-            comboBox_proveedor_producto.DataSource = proveedores;
-            comboBox_proveedor_producto.DisplayMember = "Nombre";
-            comboBox_proveedor_producto.ValueMember = "Id";
-
-            // Cargar Marcas
-            var marcas = productoService.ObtenerMarcas();
-            comboBox_marca_producto.DataSource = marcas;
-            comboBox_marca_producto.DisplayMember = "Nombre";
-            comboBox_marca_producto.ValueMember = "Id";
         }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -107,17 +92,29 @@ namespace UI.Forms.Forms_deposito
 
         private void btn_agregar_marca_Click(object sender, EventArgs e)
         {
-            this.Close();
+            //this.Close();
 
-            // Create an instance of agregar_marca form
             gestion_marca agregarMarcaForm = new gestion_marca();
 
-            // Set the MdiParent to the Home_deposito MDI parent form
-            agregarMarcaForm.MdiParent = this.MdiParent;
+            // Suscribir el evento MarcaAgregada al método CargarDatos del formulario alta_producto
+            agregarMarcaForm.MarcaAgregada += (s, args) => FormHelper.CargarDatos(productoService, comboBox_categoria_producto, comboBox_proveedor_producto, comboBox_marca_producto);
 
-            // Show the agregar_marca form
+            agregarMarcaForm.MdiParent = this.MdiParent;
             agregarMarcaForm.Show();
 
+        }
+
+        private void btn_agregar_categoria_Click(object sender, EventArgs e)
+        {
+            alta_categoria agregarCategoriaForm = new alta_categoria();
+
+            agregarCategoriaForm.MarcaAgregada += (s, args) => FormHelper.CargarDatos(productoService, comboBox_categoria_producto, comboBox_proveedor_producto, comboBox_marca_producto);
+
+            // Set the MdiParent to the Home_deposito MDI parent form
+            agregarCategoriaForm.MdiParent = this.MdiParent;
+
+            // Show the agregar_marca form
+            agregarCategoriaForm.Show();
         }
     }
 }

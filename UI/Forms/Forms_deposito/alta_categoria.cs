@@ -1,7 +1,6 @@
-﻿using BLL;
-using BLL.Services;
+﻿using BLL.Services;
+using BLL;
 using Servicios.BLL;
-using Servicios.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,18 +10,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UI.Forms.helpers;
+using Servicios.DAL.Repositories;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace UI.Forms.Forms_deposito
 {
-    public partial class gestion_marca : Form
+    public partial class alta_categoria : Form
     {
         public event EventHandler MarcaAgregada;  // Definir el evento
 
         private ProductoService productoService;
         private BitacoraService bitacoraService;
         private UsuarioService usuarioService;
-        public gestion_marca()
+        public alta_categoria()
         {
             InitializeComponent();
             BitacoraRepository bitacoraRepository = new BitacoraRepository();
@@ -31,18 +31,18 @@ namespace UI.Forms.Forms_deposito
             productoService = new ProductoService(bitacoraService, usuarioService);
         }
 
-        private void btn_agregar_marca_Click(object sender, EventArgs e)
+        private void btn_agregar_categoria_Click(object sender, EventArgs e)
         {
             try
             {
-                productoService.AgregarMarca(textBox1.Text);
-                MessageBox.Show("Marca agregada exitosamente.");
+                productoService.AgregarCategoria(textBox_categoria.Text);
+                MessageBox.Show("Categoria agregada exitosamente.");
                 MarcaAgregada?.Invoke(this, EventArgs.Empty);
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al agregar la marca: {ex.Message}");
+                MessageBox.Show($"Error al agregar la categoria: {ex.Message}");
             }
         }
     }

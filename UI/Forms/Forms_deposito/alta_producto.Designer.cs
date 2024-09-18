@@ -40,6 +40,8 @@
             this.comboBox_categoria_producto = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btn_agregar_marca = new System.Windows.Forms.Button();
+            this.btn_agregar_categoria = new System.Windows.Forms.Button();
+            this.btn_agregar_proveedor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox_nombre_producto
@@ -140,19 +142,40 @@
             // 
             // btn_agregar_marca
             // 
-            this.btn_agregar_marca.Location = new System.Drawing.Point(474, 81);
+            this.btn_agregar_marca.Location = new System.Drawing.Point(453, 81);
             this.btn_agregar_marca.Name = "btn_agregar_marca";
-            this.btn_agregar_marca.Size = new System.Drawing.Size(121, 32);
+            this.btn_agregar_marca.Size = new System.Drawing.Size(142, 32);
             this.btn_agregar_marca.TabIndex = 13;
             this.btn_agregar_marca.Text = "Agregar Marca";
             this.btn_agregar_marca.UseVisualStyleBackColor = true;
             this.btn_agregar_marca.Click += new System.EventHandler(this.btn_agregar_marca_Click);
+            // 
+            // btn_agregar_categoria
+            // 
+            this.btn_agregar_categoria.Location = new System.Drawing.Point(453, 184);
+            this.btn_agregar_categoria.Name = "btn_agregar_categoria";
+            this.btn_agregar_categoria.Size = new System.Drawing.Size(142, 31);
+            this.btn_agregar_categoria.TabIndex = 14;
+            this.btn_agregar_categoria.Text = "Agregar Categoria";
+            this.btn_agregar_categoria.UseVisualStyleBackColor = true;
+            this.btn_agregar_categoria.Click += new System.EventHandler(this.btn_agregar_categoria_Click);
+            // 
+            // btn_agregar_proveedor
+            // 
+            this.btn_agregar_proveedor.Location = new System.Drawing.Point(453, 130);
+            this.btn_agregar_proveedor.Name = "btn_agregar_proveedor";
+            this.btn_agregar_proveedor.Size = new System.Drawing.Size(142, 32);
+            this.btn_agregar_proveedor.TabIndex = 15;
+            this.btn_agregar_proveedor.Text = "Agregar Proveedor";
+            this.btn_agregar_proveedor.UseVisualStyleBackColor = true;
             // 
             // alta_producto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(607, 441);
+            this.Controls.Add(this.btn_agregar_proveedor);
+            this.Controls.Add(this.btn_agregar_categoria);
             this.Controls.Add(this.btn_agregar_marca);
             this.Controls.Add(this.comboBox_categoria_producto);
             this.Controls.Add(this.label5);
@@ -187,5 +210,7 @@
         private System.Windows.Forms.ComboBox comboBox_categoria_producto;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btn_agregar_marca;
+        private System.Windows.Forms.Button btn_agregar_categoria;
+        private System.Windows.Forms.Button btn_agregar_proveedor;
     }
 }
