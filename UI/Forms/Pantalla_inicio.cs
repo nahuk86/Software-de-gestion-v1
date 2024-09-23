@@ -36,11 +36,11 @@ namespace UI
 
         private void button_access_Click(object sender, EventArgs e)
         {
-            string username = input_txt_username.Text.Trim();
+            string email = input_txt_username.Text.Trim();
             string enteredPassword = input_txt_password.Text;
 
             // Retrieve the user from the database
-            var usuario = _usuarioService.ObtenerUsuario(username);
+            var usuario = _usuarioService.ObtenerUsuario(email);
 
             if (usuario != null && PasswordHasher.VerifyPassword(enteredPassword, usuario.Password))
             {

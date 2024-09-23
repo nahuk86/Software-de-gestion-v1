@@ -32,7 +32,7 @@ namespace ArqBase.DAL.Repositories
                     Usuario usuario = new Usuario
                     {
                         Id = reader.GetInt32(reader.GetOrdinal("id_usuario")),
-                        Nombre = reader.GetString(reader.GetOrdinal("nombre"))
+                        Email = reader.GetString(reader.GetOrdinal("email"))
                     };
                     lista.Add(usuario);
                 }

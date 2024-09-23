@@ -28,20 +28,20 @@ namespace ArqBase.BLL
             _usuarios.GuardarPermisos(u);
         }
 
-        public Usuario ObtenerUsuario(string username)
+        public Usuario ObtenerUsuario(string email)
         {
             // Query the database to retrieve the user by username
-            var sql = @"SELECT * FROM usuarios WHERE nombre = @username;";
+            var sql = @"SELECT * FROM usuarios WHERE email = @email;";
             Usuario usuario = null;
 
-            using (var reader = SqlHelper.ExecuteReader(sql, new SqlParameter("@username", username)))
+            using (var reader = SqlHelper.ExecuteReader(sql, new SqlParameter("@email", email)))
             {
                 if (reader.Read())
                 {
                     usuario = new Usuario
                     {
                         Id = reader.GetInt32(reader.GetOrdinal("id_usuario")),
-                        Nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                        Email = reader.GetString(reader.GetOrdinal("email")),
                         Password = reader.GetString(reader.GetOrdinal("password")) // Retrieve hashed password
                     };
                 }
