@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ArqBase.DAL.Helper;
 using ArqBase.Domain;
+using Servicios.BLL;
 
 
 namespace ArqBase.DAL.Repositories
@@ -14,12 +15,37 @@ namespace ArqBase.DAL.Repositories
     public class UsuariosRepository
     {
         //PermisosRepository repoPermisos;
+
+        private string connectionString = SqlHelper.GetConnectionString();
+
         public UsuariosRepository()
         {
             // repoPermisos = new PermisosRepository();
         }
 
         // Método que obtiene todos los usuarios de la base de datos
+
+        public void CrearUsuario(Usuario usuario)
+        {
+            string hashedPassword = PasswordHasher.HashPassword(usuario.Password);
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "INSERT INTO Usuarios (email, password, nombre, apellido, dni) " +
+                               "VALUES (@Email, @Password, @Nombre, @Apellido, @DNI)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@email", usuario.Email);
+                cmd.Parameters.AddWithValue("@password", hashedPassword);
+                cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                cmd.Parameters.AddWithValue("@apellido", usuario.Apellido);
+                cmd.Parameters.AddWithValue("@dni", usuario.DNI);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
         public List<Usuario> GetAll()
         {
             var sql = @"SELECT * FROM usuarios;";
@@ -32,7 +58,7 @@ namespace ArqBase.DAL.Repositories
                     Usuario usuario = new Usuario
                     {
                         Id = reader.GetInt32(reader.GetOrdinal("id_usuario")),
-                        Nombre = reader.GetString(reader.GetOrdinal("nombre"))
+                        Email = reader.GetString(reader.GetOrdinal("email"))
                     };
                     lista.Add(usuario);
                 }
