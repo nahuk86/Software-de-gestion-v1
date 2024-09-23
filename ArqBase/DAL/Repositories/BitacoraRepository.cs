@@ -11,7 +11,7 @@ namespace Servicios.DAL.Repositories
 {
     public class BitacoraRepository
     {
-        private string connectionString = ConfigHelper.GetConnectionString();
+        private string connectionString = SqlHelper.GetConnectionString();
 
         public void RegistrarEnBitacora(Bitacora bitacora)
         {

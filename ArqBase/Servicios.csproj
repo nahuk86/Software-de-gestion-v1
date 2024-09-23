@@ -45,15 +45,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\AccesosServices.cs" />
     <Compile Include="BLL\BitacoraService.cs" />
-    <Compile Include="DAL\Helper\ConfigHelper.cs" />
+    <Compile Include="BLL\PermisosServices.cs" />
+    <Compile Include="BLL\SesionServices.cs" />
+    <Compile Include="BLL\UsuarioServices.cs" />
+    <Compile Include="DAL\Helper\SqlHelper.cs" />
     <Compile Include="DAL\Repositories\BitacoraRepository.cs" />
+    <Compile Include="DAL\Repositories\PermisosRepository.cs" />
+    <Compile Include="DAL\Repositories\UsuariosRepository.cs" />
     <Compile Include="Domain\Bitacora.cs" />
     <Compile Include="BLL\PasswordHasher.cs" />
+    <Compile Include="Domain\Componente.cs" />
+    <Compile Include="Domain\Familia.cs" />
+    <Compile Include="Domain\Patente.cs" />
+    <Compile Include="Domain\Sesion.cs" />
+    <Compile Include="Domain\TipoPermiso.cs" />
+    <Compile Include="Domain\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
