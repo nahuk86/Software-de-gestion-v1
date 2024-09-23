@@ -12,6 +12,7 @@ using System.Configuration;
 using System.Data.Common;
 using UI.Forms.Forms_gerente;
 using Servicios.BLL;
+using ArqBase.BLL;
 
 namespace UI
 {
@@ -29,7 +30,9 @@ namespace UI
             var depositoUIHandler = new DepositoUIHandler();
             var gerenteUIHandler = new GerenteUIHandler();
             var vendedorUIHandler = new VendedorUIHandler();
-            var usuarioService = new UsuarioService();
+            var usuarioService = new UsuarioServices();
+            var usuarioServiceBLL = new UsuarioService();
+
 
 
             // Crear la instancia de la fábrica de UI
@@ -39,12 +42,13 @@ namespace UI
 
             // Iniciar la aplicación con la pantalla de inicio de sesión
 
-            IClienteService clienteService = new ClienteService(connectionString, usuarioService); // Pasamos el objeto usuarioService
+            IClienteService clienteService = new ClienteService(connectionString, usuarioServiceBLL); // Pasamos el objeto usuarioService
 
-            var loginForm = new Pantalla_inicio(usuarioService, uiFactory, clienteService);
+            PermisosServices permisosService = new PermisosServices();
+            Pantalla_inicio pantallaInicio = new Pantalla_inicio(usuarioService, uiFactory, clienteService, permisosService);
 
 
-            Application.Run(loginForm);
+            Application.Run(pantallaInicio);
 
         }
     }

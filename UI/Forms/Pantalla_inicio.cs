@@ -1,6 +1,8 @@
-﻿using BLL;
+﻿using ArqBase.BLL;
+using BLL;
 using BLL.Interfaces;
 using BLL.Services;
+using Servicios.BLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,85 +18,60 @@ namespace UI
 {
     public partial class Pantalla_inicio : Form
     {
-        private readonly UsuarioService _usuarioService;
+        private readonly UsuarioServices _usuarioService;
         private readonly RoleBasedUIFactory _uiFactory;
         private readonly IClienteService _clienteService;
+        private readonly PermisosServices _permisosService;
 
 
 
-        public Pantalla_inicio(UsuarioService usuarioService, RoleBasedUIFactory uiFactory, IClienteService clienteService)
+        public Pantalla_inicio(UsuarioServices usuarioService, RoleBasedUIFactory uiFactory, IClienteService clienteService, PermisosServices permisosService)
         {
             InitializeComponent();
             _usuarioService = usuarioService;
             _uiFactory = uiFactory;
             _clienteService = clienteService;
-
-
+            _permisosService = permisosService;
         }
-
-
-        private void IniciarAplicacionParaUsuario(string rolUsuario)
-        {
-            // Aquí definimos la lógica para iniciar la aplicación según el rol
-            if (rolUsuario == "Gerente")
-            {
-                Home_gerente formGerente = new Home_gerente();
-                formGerente.Show();
-            }
-            else if (rolUsuario == "Vendedor")
-            {
-                Home_vendedor home_Vendedor = new Home_vendedor(_clienteService);
-                home_Vendedor.Show();
-            }
-            else if (rolUsuario == "Deposito")
-            {
-                Home_deposito home_Deposito = new Home_deposito();
-                home_Deposito.Show();
-            }
-            else
-            {
-                MessageBox.Show("Rol de usuario no reconocido.");
-            }
-
-            // Opcional: puedes cerrar la pantalla de inicio si se navega a otra
-            this.Close();
-        }
-
 
         private void button_access_Click(object sender, EventArgs e)
         {
             string username = input_txt_username.Text.Trim();
-            string password = input_txt_password.Text;
+            string enteredPassword = input_txt_password.Text;
 
-            bool autenticado = _usuarioService.AutenticarUsuario(username, password);
+            // Retrieve the user from the database
+            var usuario = _usuarioService.ObtenerUsuario(username);
 
-            if (autenticado)
+            if (usuario != null && PasswordHasher.VerifyPassword(enteredPassword, usuario.Password))
             {
-                string rolUsuario = _usuarioService.ObtenerRolUsuario(username);
-                var uiHandler = _uiFactory.GetUIHandler(rolUsuario);
+                // Password matches, authenticate user and load permissions
+                _permisosService.FillUserComponents(usuario);
 
-                if (uiHandler != null)
+                // Redirect to the appropriate user interface based on their permissions
+                List<string> rolesUsuario = _usuarioService.ObtenerRolesUsuario(usuario);
+                foreach (var rol in rolesUsuario)
                 {
-                    if (rolUsuario == "Vendedor") // O cualquier otro rol que necesite ClienteService
+                    // Handle roles dynamically, for example:
+                    if (rol == "Gerente")
                     {
-                        var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-                        IClienteService clienteService = new ClienteService(connectionString, _usuarioService); // Pasamos también _usuarioService
-                        uiHandler.MostrarUI(clienteService);
+                        Home_gerente formGerente = new Home_gerente();
+                        formGerente.Show();
                     }
-                    else
+                    else if (rol == "Vendedor")
                     {
-                        uiHandler.MostrarUI();
+                        Home_vendedor home_Vendedor = new Home_vendedor(_clienteService);
+                        home_Vendedor.Show();
                     }
-
-                    this.Hide(); // Oculta el formulario de inicio de sesión
-                }
-                else
-                {
-                    MessageBox.Show("Rol de usuario no reconocido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else if (rol == "Deposito")
+                    {
+                        Home_deposito Home_deposito = new Home_deposito();
+                        Home_deposito.Show();
+                    }
                 }
             }
             else
             {
+                // Invalid credentials
                 MessageBox.Show("Nombre de usuario o contraseña incorrectos.", "Autenticación Fallida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
