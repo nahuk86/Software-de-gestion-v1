@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ArqBase.Domain;
 using ArqBase.DAL.Helper;
 using System.Data.SqlClient;
+using Servicios.BLL;
 
 namespace ArqBase.BLL
 {
@@ -74,6 +75,14 @@ namespace ArqBase.BLL
 
             return roles; // Return all roles
         }
+
+        public void CrearUsuario(Usuario usuario)
+        {
+            // Pass the actual user data to the repository method
+            _usuarios.CrearUsuario(usuario);
+        }
+
+
     }
 }
 
