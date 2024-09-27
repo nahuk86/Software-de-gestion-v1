@@ -34,6 +34,7 @@
             this.listarTodosLosUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buscarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarRolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignarPermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +55,8 @@
             this.crearUsuarioToolStripMenuItem,
             this.listarTodosLosUsuariosToolStripMenuItem,
             this.buscarUsuarioToolStripMenuItem,
-            this.asignarRolToolStripMenuItem});
+            this.asignarRolToolStripMenuItem,
+            this.asignarPermisosToolStripMenuItem});
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
             this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
@@ -83,8 +85,15 @@
             // 
             this.asignarRolToolStripMenuItem.Name = "asignarRolToolStripMenuItem";
             this.asignarRolToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-            this.asignarRolToolStripMenuItem.Text = "Asignar rol";
+            this.asignarRolToolStripMenuItem.Text = "Gestionar permisos";
             this.asignarRolToolStripMenuItem.Click += new System.EventHandler(this.asignarRolToolStripMenuItem_Click);
+            // 
+            // asignarPermisosToolStripMenuItem
+            // 
+            this.asignarPermisosToolStripMenuItem.Name = "asignarPermisosToolStripMenuItem";
+            this.asignarPermisosToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.asignarPermisosToolStripMenuItem.Text = "Asignar permisos";
+            this.asignarPermisosToolStripMenuItem.Click += new System.EventHandler(this.asignarPermisosToolStripMenuItem_Click);
             // 
             // Home_gerente
             // 
@@ -112,5 +121,6 @@
         private System.Windows.Forms.ToolStripMenuItem listarTodosLosUsuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buscarUsuarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignarRolToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem asignarPermisosToolStripMenuItem;
     }
 }
