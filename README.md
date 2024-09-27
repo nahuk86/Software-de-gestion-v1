@@ -25,17 +25,32 @@ El proyecto está dividido en varias capas siguiendo la arquitectura en capas (L
 
 ## Patrones de Diseño Utilizados
 
-1. **Arquitectura en Capas (Layered Architecture)**: Separación de la aplicación en capas claras (Dominio, DAL, BLL, UI) para una mejor mantenibilidad y escalabilidad.
-   
-2. **Patrón de Inyección de Dependencias (Dependency Injection)**: Facilita la inyección de dependencias, promoviendo un código más limpio y fácil de mantener.
-   
-3. **Patrón de Fábrica (Factory)**: Utilizado para crear y manejar la instancia correcta de UI según el rol del usuario autenticado.
-   
-4. **Patrón Repositorio (Repository Pattern)**: Implementado en la DAL para gestionar el acceso a datos, proporcionando una capa de abstracción sobre la lógica de acceso a la base de datos.
+A lo largo del desarrollo de este proyecto, se han implementado varios patrones de diseño que ayudan a organizar el código, mejorar su mantenibilidad y promover buenas prácticas en el desarrollo de software:
 
-5. **Patrón Estrategia (Strategy)**: La capa UI implementa la lógica para manejar diferentes interfaces según los roles de usuario, utilizando diferentes estrategias de interfaz.
+### 1. **Singleton (Patrón de Creación)**
+   - **Clase `Sesion`**: La clase `Sesion` utiliza el patrón Singleton para asegurar que solo exista una instancia de la sesión de usuario en todo el sistema. Este patrón es esencial para gestionar de manera eficiente la información de la sesión y prevenir la creación de múltiples sesiones simultáneas.
+   
+   **Ventajas**:
+   - Evita la creación innecesaria de objetos.
+   - Asegura que se trabaje siempre con la misma instancia para mantener la coherencia de los datos.
 
-6. **Patrón de Registro de Actividad (Logger Pattern)**: Implementado para registrar todas las transacciones y actividades en el sistema, facilitando auditorías y análisis.
+### 2. **Composite (Patrón Estructural)**
+   - **Clase `Componente` y sus derivados `Patente` y `Familia`**: El patrón Composite se utiliza para estructurar jerárquicamente los permisos de usuarios. Cada `Componente` puede tener hijos que pueden ser permisos individuales (`Patente`) o conjuntos de permisos (`Familia`), lo que permite manejar roles complejos en la organización.
+
+   **Ventajas**:
+   - Simplifica el tratamiento de grupos y elementos individuales de permisos.
+   - Permite una fácil extensión para añadir nuevos tipos de permisos o estructuras jerárquicas.
+
+### 3. **Repository (Patrón de Acceso a Datos)**
+   - **Clases en la capa DAL**: Se ha implementado el patrón Repository para abstraer el acceso a la base de datos. Este patrón facilita la persistencia y recuperación de entidades, como usuarios y permisos, ocultando la lógica de acceso a datos detrás de una interfaz común.
+
+   **Ventajas**:
+   - Desacopla la lógica de negocio de la lógica de acceso a datos.
+   - Facilita el testeo unitario al permitir el uso de repositorios simulados (mocks).
+
+### 4. **Factory (Patrón de Creación)**
+   - **Creación de usuarios y permisos**: Aunque no explícitamente, se sigue el patrón Factory para encapsular la creación de objetos complejos, como usuarios y sus componentes, facilitando su inicialización desde diferentes capas del sistema.
+
 
 ## Requisitos Previos
 
