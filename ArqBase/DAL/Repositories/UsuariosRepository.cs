@@ -45,24 +45,40 @@ namespace ArqBase.DAL.Repositories
             }
         }
 
-
         public List<Usuario> GetAll()
         {
-            var sql = @"SELECT * FROM usuarios;";
+            var cnn = new SqlConnection(SqlHelper.GetConnectionString());
+            cnn.Open();
+            var cmd = new SqlCommand();
+            cmd.Connection = cnn;
+
+            var sql = $@"select * from usuarios;";
+
+            cmd.CommandText = sql;
+
+            var reader = cmd.ExecuteReader();
+
             var lista = new List<Usuario>();
 
-            using (var reader = SqlHelper.ExecuteReader(sql))
+            while (reader.Read())
             {
-                while (reader.Read())
-                {
-                    Usuario usuario = new Usuario
-                    {
-                        Id = reader.GetInt32(reader.GetOrdinal("id_usuario")),
-                        Email = reader.GetString(reader.GetOrdinal("email"))
-                    };
-                    lista.Add(usuario);
-                }
+                Usuario c = new Usuario();
+                c.Id = reader.GetInt32(reader.GetOrdinal("id_usuario"));
+                c.Nombre = reader.GetString(reader.GetOrdinal("nombre"));
+                lista.Add(c);
             }
+
+            reader.Close();
+            cnn.Close();
+
+            //vinculo los usuarios con las patentes y familias que tiene configuradas.
+            //foreach (var item in lista)
+            //{
+            //   repoPermisos.FillUserPermissions(item);
+            //}
+
+
+
             return lista;
         }
 

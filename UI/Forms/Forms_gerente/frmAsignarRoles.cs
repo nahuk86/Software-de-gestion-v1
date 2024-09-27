@@ -24,17 +24,9 @@ namespace UI.Forms.Forms_gerente
         {
             InitializeComponent();
 
-            repo = new UsuarioServices();
-            permisosRepo = new PermisosServices();
-            this.cboUsuarios.DataSource = repo.GetAll();
-            this.cboFamilias.DataSource = permisosRepo.GetAllFamilias();
-            this.cboPatentes.DataSource = permisosRepo.GetAllPatentes();
         }
 
-        private void cboUsuarios_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
 
         void LlenarTreeView(TreeNode padre, Componente c)
         {
@@ -159,6 +151,12 @@ namespace UI.Forms.Forms_gerente
 
         private void frmAsignarRoles_Load(object sender, EventArgs e)
         {
+
+            repo = new UsuarioServices();
+            permisosRepo = new PermisosServices();
+            this.cboUsuarios.DataSource = repo.GetAll();
+            this.cboFamilias.DataSource = permisosRepo.GetAllFamilias();
+            this.cboPatentes.DataSource = permisosRepo.GetAllPatentes();
 
         }
     }
