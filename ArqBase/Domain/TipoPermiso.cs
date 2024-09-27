@@ -10,6 +10,7 @@ namespace ArqBase.Domain
     {
         Alta_usuario,
         Asignar_rol_usuario,
+        Gestionar_roles,
         Baja_usuario,
         Crear_cliente,
         Editar_cliente,
@@ -18,6 +19,8 @@ namespace ArqBase.Domain
         Alta_proveedor,
         Alta_marca,
         Gerente,
+        Vendedor,
+        Deposito,
     }
 
 

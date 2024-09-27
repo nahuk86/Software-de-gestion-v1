@@ -52,5 +52,19 @@ namespace UI
                 MessageBox.Show("no tiene permisos");
             }
         }
+
+        private void asignarPermisosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Sesion.GetInstance.IsInRole(TipoPermiso.Asignar_rol_usuario))
+            {
+                frmAsignarRoles frm2 = new frmAsignarRoles();
+                frm2.MdiParent = this;
+                frm2.Show();
+            }
+            else
+            {
+                MessageBox.Show("no tiene permisos");
+            }
+        }
     }
 }
