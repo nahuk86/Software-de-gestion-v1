@@ -15,6 +15,7 @@ using Servicios.BLL;
 using Servicios.DAL.Repositories;
 using UI.Forms.Forms_vendedor;
 using UI.Forms.helpers;
+using ArqBase.BLL;
 
 namespace UI.Forms.Forms_deposito
 {
@@ -23,6 +24,7 @@ namespace UI.Forms.Forms_deposito
         private ProductoService productoService;
         private BitacoraService bitacoraService;
         private UsuarioService usuarioService;
+        private readonly SesionServices _sesionService;
 
 
         public alta_producto()
@@ -36,6 +38,8 @@ namespace UI.Forms.Forms_deposito
 
             // Crear instancia de UsuarioService (Asegúrate de que UsuarioService esté correctamente definido)
             usuarioService = new UsuarioService();
+
+            _sesionService = new SesionServices();
 
             // Crear instancia de ProductoService con las dependencias
             productoService = new ProductoService(bitacoraService, usuarioService);

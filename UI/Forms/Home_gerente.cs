@@ -15,11 +15,11 @@ namespace UI
 {
     public partial class Home_gerente : Form
     {
+
         public Home_gerente()
         {
             InitializeComponent();
             this.IsMdiContainer = true;
-
         }
 
         private void Home_gerente_Load(object sender, EventArgs e)

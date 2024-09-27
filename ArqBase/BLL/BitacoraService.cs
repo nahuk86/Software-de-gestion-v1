@@ -17,12 +17,12 @@ namespace Servicios.BLL
             _bitacoraRepository = bitacoraRepository ?? throw new ArgumentNullException(nameof(bitacoraRepository));
         }
 
-        public void Registrar(string usuario, string accion, string detalle = null)
+        public void Registrar(string email, string accion, string detalle)
         {
             Bitacora bitacora = new Bitacora
             {
                 FechaHora = DateTime.Now,
-                Usuario = usuario,
+                Email = email,
                 Accion = accion,
                 Detalle = detalle
             };

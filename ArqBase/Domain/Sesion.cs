@@ -8,81 +8,80 @@ namespace ArqBase.Domain
 {
     public class Sesion
     {
-        static Sesion _sesion;
-        Usuario _usuario;
+            static Sesion _sesion;
+            Usuario _usuario;
 
-        public static Sesion GetInstance
-        {
-            get
+            public static Sesion GetInstance
             {
-                if (_sesion == null) _sesion = new Sesion();
-                return _sesion;
-            }
-        }
-        public bool IsLoggedIn()
-        {
-            return _usuario != null;
-        }
-
-        bool isInRole(Componente c, TipoPermiso permiso, bool existe)
-        {
-
-
-            if (c.Permiso.Equals(permiso))
-                existe = true;
-            else
-            {
-                foreach (var item in c.Hijos)
+                get
                 {
-                    existe = isInRole(item, permiso, existe);
-                    if (existe) return true;
+                    if (_sesion == null) _sesion = new Sesion();
+                    return _sesion;
                 }
-
-
-
             }
 
-            return existe;
-        }
-
-        public bool IsInRole(TipoPermiso permiso)
-        {
-            if (_usuario == null || _usuario.Permisos == null)
+            public bool IsLoggedIn()
             {
-                // User is not logged in or Permisos is null
-                return false;
+                return _usuario != null;
             }
 
-            bool existe = false;
-            foreach (var item in _usuario.Permisos)
+            // Método para obtener el objeto Usuario actual
+            public Usuario GetUsuario()
             {
-                if (item.Permiso.Equals(permiso))
-                    return true;
+                return _usuario;
+            }
+
+            bool isInRole(Componente c, TipoPermiso permiso, bool existe)
+            {
+                if (c.Permiso.Equals(permiso))
+                    existe = true;
                 else
                 {
-                    existe = isInRole(item, permiso, existe);
-                    if (existe) return true;
+                    foreach (var item in c.Hijos)
+                    {
+                        existe = isInRole(item, permiso, existe);
+                        if (existe) return true;
+                    }
                 }
+
+                return existe;
             }
 
-            return existe;
-        }
+            public bool IsInRole(TipoPermiso permiso)
+            {
+                if (_usuario == null || _usuario.Permisos == null)
+                {
+                    return false;
+                }
 
-        public void Logout()
-        {
-            _sesion._usuario = null;
-        }
+                bool existe = false;
+                foreach (var item in _usuario.Permisos)
+                {
+                    if (item.Permiso.Equals(permiso))
+                        return true;
+                    else
+                    {
+                        existe = isInRole(item, permiso, existe);
+                        if (existe) return true;
+                    }
+                }
 
+                return existe;
+            }
 
-        public void Login(Usuario u)
-        {
-            _sesion._usuario = u;
+            public void Logout()
+            {
+                _sesion._usuario = null;
+            }
 
-        }
+            public void Login(Usuario u)
+            {
+                _sesion._usuario = u;
+            }
 
-        private Sesion()
-        {
+            private Sesion()
+            {
 
+            }
         }
     }
-}

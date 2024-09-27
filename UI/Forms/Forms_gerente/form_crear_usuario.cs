@@ -13,12 +13,16 @@ using System.Configuration;
 using BLL.DTOs;
 using ArqBase.BLL;
 using ArqBase.Domain;
+using Servicios.BLL;
 
 namespace UI.Forms.Forms_gerente
 {
     public partial class form_crear_usuario : Form
     {
         private readonly UsuarioServices _usuarioService;
+        private readonly Usuario _usuario;
+        private readonly BitacoraService _bitacoraService;
+        SesionServices sesionService = new SesionServices();
 
         public form_crear_usuario()
         {
@@ -43,6 +47,16 @@ namespace UI.Forms.Forms_gerente
                 // Call the service with a Usuario object
                 _usuarioService.CrearUsuario(usuario);
                 MessageBox.Show("Usuario creado con éxito.");
+
+                //Usuario usuariosesion = sesionService.GetUsuarioActivo();
+                //if (usuariosesion != null)
+                //{
+                //    _bitacoraService.Registrar("hola", "Creación de usuario", $"Usuario con email {usuario.Email} creado");
+                //}
+                //else
+                //{
+                //    MessageBox.Show("No hay un usuario activo en la sesión.");
+                //}
             }
             catch (Exception ex)
             {
@@ -51,6 +65,11 @@ namespace UI.Forms.Forms_gerente
         }
 
         private void input_email_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void form_crear_usuario_Load(object sender, EventArgs e)
         {
 
         }
