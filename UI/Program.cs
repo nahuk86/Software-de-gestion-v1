@@ -32,6 +32,7 @@ namespace UI
             var vendedorUIHandler = new VendedorUIHandler();
             var usuarioService = new UsuarioServices();
             var usuarioServiceBLL = new UsuarioService();
+            var sesionService = new SesionServices();
 
 
 
@@ -45,7 +46,7 @@ namespace UI
             IClienteService clienteService = new ClienteService(connectionString, usuarioServiceBLL); // Pasamos el objeto usuarioService
 
             PermisosServices permisosService = new PermisosServices();
-            Pantalla_inicio pantallaInicio = new Pantalla_inicio(usuarioService, uiFactory, clienteService, permisosService);
+            Pantalla_inicio pantallaInicio = new Pantalla_inicio(sesionService, usuarioService, uiFactory, clienteService, permisosService);
 
 
             Application.Run(pantallaInicio);

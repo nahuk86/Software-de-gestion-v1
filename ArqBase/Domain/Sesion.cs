@@ -47,6 +47,12 @@ namespace ArqBase.Domain
 
         public bool IsInRole(TipoPermiso permiso)
         {
+            if (_usuario == null || _usuario.Permisos == null)
+            {
+                // User is not logged in or Permisos is null
+                return false;
+            }
+
             bool existe = false;
             foreach (var item in _usuario.Permisos)
             {
@@ -57,7 +63,6 @@ namespace ArqBase.Domain
                     existe = isInRole(item, permiso, existe);
                     if (existe) return true;
                 }
-
             }
 
             return existe;

@@ -17,6 +17,7 @@ namespace ArqBase.Domain
         Alta_categoria,
         Alta_proveedor,
         Alta_marca,
+        Gerente,
     }
 
 

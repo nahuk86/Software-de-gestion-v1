@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArqBase.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,6 +32,25 @@ namespace UI
             form_crear_usuario formHijo = new form_crear_usuario();
             formHijo.MdiParent = this;  // Configura el formulario padre
             formHijo.Show();
+        }
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void asignarRolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Sesion.GetInstance.IsInRole(TipoPermiso.Asignar_rol_usuario))
+            {
+                frmPatenteFamilia frm = new frmPatenteFamilia();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("no tiene permisos");
+            }
         }
     }
 }

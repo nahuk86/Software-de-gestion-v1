@@ -6,7 +6,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ArqBase.DAL.Helper;   
+using ArqBase.DAL.Helper;
+
 
 namespace ArqBase.DAL.Repositories
 {
@@ -184,44 +185,98 @@ namespace ArqBase.DAL.Repositories
             return component;
         }
 
+        //public void FillUserComponents(Usuario u)
+        //{
+        //    var sql = @"SELECT p.* 
+        //                FROM usuarios_permisos up 
+        //                INNER JOIN permiso p ON up.id_permiso = p.id 
+        //                WHERE id_usuario = @id;";
+
+        //    using (var reader = SqlHelper.ExecuteReader(sql, new SqlParameter("@id", u.Id)))
+        //    {
+        //        u.Permisos.Clear();
+
+        //        while (reader.Read())
+        //        {
+        //            var id = reader.GetInt32(reader.GetOrdinal("id"));
+        //            var nombre = reader.GetString(reader.GetOrdinal("nombre"));
+        //            var permiso = reader.IsDBNull(reader.GetOrdinal("permiso")) ? null : reader.GetString(reader.GetOrdinal("permiso"));
+
+        //            Componente c;
+
+        //            if (string.IsNullOrEmpty(permiso))
+        //            {
+        //                // Si 'permiso' es nulo o vacío, crea una instancia de Familia
+        //                c = new Familia();
+        //            }
+        //            else
+        //            {
+        //                // Si 'permiso' no es nulo o vacío, crea una instancia de Patente y asigna el Permiso
+        //                c = new Patente
+        //                {
+        //                    Permiso = (TipoPermiso)Enum.Parse(typeof(TipoPermiso), permiso)
+        //                };
+        //            }
+
+        //            c.Id = id;
+        //            c.Nombre = nombre;
+        //            u.Permisos.Add(c);
+        //        }
+        //    }
+        //}
+
         public void FillUserComponents(Usuario u)
         {
-            var sql = @"SELECT p.* 
-                        FROM usuarios_permisos up 
-                        INNER JOIN permiso p ON up.id_permiso = p.id 
-                        WHERE id_usuario = @id;";
 
-            using (var reader = SqlHelper.ExecuteReader(sql, new SqlParameter("@id", u.Id)))
+            var cnn = new SqlConnection(SqlHelper.GetConnectionString());
+            cnn.Open();
+
+            var cmd2 = new SqlCommand();
+            cmd2.Connection = cnn;
+            cmd2.CommandText = $@"select p.* from usuarios_permisos up inner join permiso p on up.id_permiso=p.id where id_usuario=@id;";
+            cmd2.Parameters.AddWithValue("id", u.Id);
+
+            var reader = cmd2.ExecuteReader();
+            u.Permisos.Clear();
+            while (reader.Read())
             {
-                u.Permisos.Clear();
 
-                while (reader.Read())
+                var idp = reader.GetInt32(reader.GetOrdinal("id"));
+                var nombrep = reader.GetString(reader.GetOrdinal("nombre"));
+
+                var permisop = String.Empty;
+                if (reader["permiso"] != DBNull.Value)
+                    permisop = reader.GetString(reader.GetOrdinal("permiso"));
+
+                Componente c1;
+                if (!String.IsNullOrEmpty(permisop))
                 {
-                    var id = reader.GetInt32(reader.GetOrdinal("id"));
-                    var nombre = reader.GetString(reader.GetOrdinal("nombre"));
-                    var permiso = reader.IsDBNull(reader.GetOrdinal("permiso")) ? null : reader.GetString(reader.GetOrdinal("permiso"));
-
-                    Componente c;
-
-                    if (string.IsNullOrEmpty(permiso))
-                    {
-                        // Si 'permiso' es nulo o vacío, crea una instancia de Familia
-                        c = new Familia();
-                    }
-                    else
-                    {
-                        // Si 'permiso' no es nulo o vacío, crea una instancia de Patente y asigna el Permiso
-                        c = new Patente
-                        {
-                            Permiso = (TipoPermiso)Enum.Parse(typeof(TipoPermiso), permiso)
-                        };
-                    }
-
-                    c.Id = id;
-                    c.Nombre = nombre;
-                    u.Permisos.Add(c);
+                    c1 = new Patente();
+                    c1.Id = idp;
+                    c1.Nombre = nombrep;
+                    c1.Permiso = (TipoPermiso)Enum.Parse(typeof(TipoPermiso), permisop);
+                    u.Permisos.Add(c1);
                 }
+                else
+                {
+                    c1 = new Familia();
+                    c1.Id = idp;
+                    c1.Nombre = nombrep;
+
+                    var f = GetAll("=" + idp);
+
+                    foreach (var familia in f)
+                    {
+                        c1.AgregarHijo(familia);
+                    }
+                    u.Permisos.Add(c1);
+                }
+
+
+
             }
+            reader.Close();
+
         }
 
         public void FillFamilyComponents(Familia familia)
