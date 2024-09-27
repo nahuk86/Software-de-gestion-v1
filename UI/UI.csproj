@@ -77,6 +77,12 @@
     <Compile Include="Forms\Forms_gerente\form_crear_usuario.Designer.cs">
       <DependentUpon>form_crear_usuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Forms_gerente\frmPatenteFamilia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Forms_gerente\frmPatenteFamilia.Designer.cs">
+      <DependentUpon>frmPatenteFamilia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Forms_vendedor\alta_cliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Forms_gerente\form_crear_usuario.resx">
       <DependentUpon>form_crear_usuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Forms_gerente\frmPatenteFamilia.resx">
+      <DependentUpon>frmPatenteFamilia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Forms_vendedor\alta_cliente.resx">
       <DependentUpon>alta_cliente.cs</DependentUpon>

@@ -33,6 +33,7 @@
             this.crearUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listarTodosLosUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buscarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignarRolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,10 +53,12 @@
             this.usuariosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.crearUsuarioToolStripMenuItem,
             this.listarTodosLosUsuariosToolStripMenuItem,
-            this.buscarUsuarioToolStripMenuItem});
+            this.buscarUsuarioToolStripMenuItem,
+            this.asignarRolToolStripMenuItem});
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
             this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
+            this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // crearUsuarioToolStripMenuItem
             // 
@@ -75,6 +78,13 @@
             this.buscarUsuarioToolStripMenuItem.Name = "buscarUsuarioToolStripMenuItem";
             this.buscarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
             this.buscarUsuarioToolStripMenuItem.Text = "Buscar usuario";
+            // 
+            // asignarRolToolStripMenuItem
+            // 
+            this.asignarRolToolStripMenuItem.Name = "asignarRolToolStripMenuItem";
+            this.asignarRolToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.asignarRolToolStripMenuItem.Text = "Asignar rol";
+            this.asignarRolToolStripMenuItem.Click += new System.EventHandler(this.asignarRolToolStripMenuItem_Click);
             // 
             // Home_gerente
             // 
@@ -101,5 +111,6 @@
         private System.Windows.Forms.ToolStripMenuItem crearUsuarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listarTodosLosUsuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buscarUsuarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem asignarRolToolStripMenuItem;
     }
 }

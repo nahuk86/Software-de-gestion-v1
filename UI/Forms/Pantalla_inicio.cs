@@ -22,16 +22,19 @@ namespace UI
         private readonly RoleBasedUIFactory _uiFactory;
         private readonly IClienteService _clienteService;
         private readonly PermisosServices _permisosService;
+        private readonly SesionServices _sesionService;
+  
 
 
 
-        public Pantalla_inicio(UsuarioServices usuarioService, RoleBasedUIFactory uiFactory, IClienteService clienteService, PermisosServices permisosService)
+        public Pantalla_inicio(SesionServices sesionService, UsuarioServices usuarioService, RoleBasedUIFactory uiFactory, IClienteService clienteService, PermisosServices permisosService)
         {
             InitializeComponent();
             _usuarioService = usuarioService;
             _uiFactory = uiFactory;
             _clienteService = clienteService;
             _permisosService = permisosService;
+            _sesionService = sesionService;
         }
 
         private void button_access_Click(object sender, EventArgs e)
@@ -49,6 +52,8 @@ namespace UI
 
                 // Redirect to the appropriate user interface based on their permissions
                 List<string> rolesUsuario = _usuarioService.ObtenerRolesUsuario(usuario);
+                _sesionService.Login(usuario);
+
                 foreach (var rol in rolesUsuario)
                 {
                     // Handle roles dynamically, for example:
@@ -56,16 +61,19 @@ namespace UI
                     {
                         Home_gerente formGerente = new Home_gerente();
                         formGerente.Show();
+                        
                     }
                     else if (rol == "Vendedor")
                     {
                         Home_vendedor home_Vendedor = new Home_vendedor(_clienteService);
                         home_Vendedor.Show();
+
                     }
                     else if (rol == "Deposito")
                     {
                         Home_deposito Home_deposito = new Home_deposito();
                         Home_deposito.Show();
+
                     }
                 }
             }
