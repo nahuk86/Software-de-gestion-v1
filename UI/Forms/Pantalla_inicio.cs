@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.Forms.helpers;
+using ArqBase.Domain;
 
 namespace UI
 {
@@ -24,12 +25,11 @@ namespace UI
         private readonly IClienteService _clienteService;
         private readonly PermisosServices _permisosService;
         private readonly SesionServices _sesionService;
+        private readonly BitacoraService _bitacoraService;
         SesionServices sesionService = new SesionServices();
         UsuarioServices usuarioService = new UsuarioServices();
         PermisosServices permisosService = new PermisosServices();
-
-
-
+        private Usuario usuariosesion;
 
         public Pantalla_inicio()
         {
@@ -37,6 +37,8 @@ namespace UI
             _usuarioService = usuarioService;
             _permisosService = permisosService;
             _sesionService = sesionService;
+            _bitacoraService = new BitacoraService();
+
         }
 
         private void button_access_Click(object sender, EventArgs e)
@@ -63,6 +65,16 @@ namespace UI
                     var formFactory = new FormFactory();
                     var form = formFactory.CreateForm(rolesUsuario);
 
+                    usuariosesion = sesionService.GetUsuarioActivo();
+
+                    if (usuariosesion != null)
+                    {
+                        _bitacoraService.Registrar(usuariosesion.Email, "Inicio de sesion", $"Usuario con email {usuario.Email} ha iniciado sesion");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay un usuario activo en la sesión.");
+                    }
                     form.Show();
                     this.Hide();
                 }
@@ -70,12 +82,17 @@ namespace UI
                 {
                     // Invalid credentials
                     MessageBox.Show("Autenticación fallida. Por favor, inténtelo de nuevo.", "Autenticación Fallida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    _bitacoraService.Registrar(email, "error de inicion de sesion", "Autenticación Fallida");
+
                 }
             }
             else
             {
                 // User not found
                 MessageBox.Show("Usuario no encontrado.", "Autenticación Fallida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                _bitacoraService.Registrar(email, "error de inicion de sesion", "Autenticación Fallida");
+
+
             }
         }
 
