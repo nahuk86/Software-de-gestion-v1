@@ -17,11 +17,11 @@ namespace Servicios.DAL.Repositories
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "INSERT INTO Bitacora (FechaHora, Usuario, Accion, Detalle) " +
-                               "VALUES (@FechaHora, @Usuario, @Accion, @Detalle)";
+                string query = "INSERT INTO Bitacora (FechaHora, Email, Accion, Detalle) " +
+                               "VALUES (@FechaHora, @Email, @Accion, @Detalle)";
                 SqlCommand command = new SqlCommand(query, conn);
                 command.Parameters.AddWithValue("@FechaHora", bitacora.FechaHora);
-                command.Parameters.AddWithValue("@Usuario", bitacora.Usuario);
+                command.Parameters.AddWithValue("@Email", bitacora.Email);
                 command.Parameters.AddWithValue("@Accion", bitacora.Accion);
                 command.Parameters.AddWithValue("@Detalle", bitacora.Detalle ?? (object)DBNull.Value);
 

@@ -154,6 +154,7 @@
             this.Controls.Add(this.input_email);
             this.Name = "form_crear_usuario";
             this.Text = "form_crear_usuario";
+            this.Load += new System.EventHandler(this.form_crear_usuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
