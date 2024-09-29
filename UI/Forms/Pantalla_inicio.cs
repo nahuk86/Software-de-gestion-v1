@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.Forms.helpers;
 
 namespace UI
 {
@@ -23,16 +24,17 @@ namespace UI
         private readonly IClienteService _clienteService;
         private readonly PermisosServices _permisosService;
         private readonly SesionServices _sesionService;
-  
+        SesionServices sesionService = new SesionServices();
+        UsuarioServices usuarioService = new UsuarioServices();
+        PermisosServices permisosService = new PermisosServices();
 
 
 
-        public Pantalla_inicio(SesionServices sesionService, UsuarioServices usuarioService, RoleBasedUIFactory uiFactory, IClienteService clienteService, PermisosServices permisosService)
+
+        public Pantalla_inicio()
         {
             InitializeComponent();
             _usuarioService = usuarioService;
-            _uiFactory = uiFactory;
-            _clienteService = clienteService;
             _permisosService = permisosService;
             _sesionService = sesionService;
         }
@@ -45,42 +47,35 @@ namespace UI
             // Retrieve the user from the database
             var usuario = _usuarioService.ObtenerUsuario(email);
 
-            if (usuario != null && PasswordHasher.VerifyPassword(enteredPassword, usuario.Password))
+            if (usuario != null)
             {
-                // Password matches, authenticate user and load permissions
-                _permisosService.FillUserComponents(usuario);
-
-                // Redirect to the appropriate user interface based on their permissions
-                List<string> rolesUsuario = _usuarioService.ObtenerRolesUsuario(usuario);
-                _sesionService.Login(usuario);
-
-                foreach (var rol in rolesUsuario)
+                // Verify the password using a secure password verification algorithm
+                if (PasswordHasher.VerifyPassword(enteredPassword, usuario.Password))
                 {
-                    // Handle roles dynamically, for example:
-                    if (rol == "Gerente")
-                    {
-                        Home_gerente formGerente = new Home_gerente();
-                        formGerente.Show();
-                        
-                    }
-                    else if (rol == "Vendedor")
-                    {
-                        Home_vendedor home_Vendedor = new Home_vendedor(_clienteService);
-                        home_Vendedor.Show();
+                    // Password matches, authenticate user and load permissions
+                    _permisosService.FillUserComponents(usuario);
 
-                    }
-                    else if (rol == "Deposito")
-                    {
-                        Home_deposito Home_deposito = new Home_deposito();
-                        Home_deposito.Show();
+                    // Redirect to the appropriate user interface based on their permissions
+                    List<string> rolesUsuario = _usuarioService.ObtenerRolesUsuario(usuario);
+                    _sesionService.Login(usuario);
 
-                    }
+                    // Use a dependency injection system to create instances of forms
+                    var formFactory = new FormFactory();
+                    var form = formFactory.CreateForm(rolesUsuario);
+
+                    form.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    // Invalid credentials
+                    MessageBox.Show("Autenticación fallida. Por favor, inténtelo de nuevo.", "Autenticación Fallida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                // Invalid credentials
-                MessageBox.Show("Nombre de usuario o contraseña incorrectos.", "Autenticación Fallida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // User not found
+                MessageBox.Show("Usuario no encontrado.", "Autenticación Fallida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

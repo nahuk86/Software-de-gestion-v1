@@ -19,11 +19,10 @@ namespace UI
 
         private readonly IClienteService _clienteService;
 
-        public Home_vendedor(IClienteService clienteService)
+        public Home_vendedor()
         {
             InitializeComponent();
             this.IsMdiContainer = true;
-            _clienteService = clienteService ?? throw new ArgumentNullException(nameof(clienteService));
 
         }
 
