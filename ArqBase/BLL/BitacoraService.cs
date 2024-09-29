@@ -17,6 +17,11 @@ namespace Servicios.BLL
             _bitacoraRepository = bitacoraRepository ?? throw new ArgumentNullException(nameof(bitacoraRepository));
         }
 
+        public BitacoraService()
+        {
+            _bitacoraRepository = new BitacoraRepository();
+        }
+
         public void Registrar(string email, string accion, string detalle)
         {
             Bitacora bitacora = new Bitacora

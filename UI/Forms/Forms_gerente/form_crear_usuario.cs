@@ -28,6 +28,8 @@ namespace UI.Forms.Forms_gerente
         {
             InitializeComponent();
             _usuarioService = new UsuarioServices();
+            _bitacoraService = new BitacoraService();
+
         }
 
         private void btn_crear_usuario_Click(object sender, EventArgs e)
@@ -48,15 +50,15 @@ namespace UI.Forms.Forms_gerente
                 _usuarioService.CrearUsuario(usuario);
                 MessageBox.Show("Usuario creado con éxito.");
 
-                //Usuario usuariosesion = sesionService.GetUsuarioActivo();
-                //if (usuariosesion != null)
-                //{
-                //    _bitacoraService.Registrar("hola", "Creación de usuario", $"Usuario con email {usuario.Email} creado");
-                //}
-                //else
-                //{
-                //    MessageBox.Show("No hay un usuario activo en la sesión.");
-                //}
+                Usuario usuariosesion = sesionService.GetUsuarioActivo();
+                if (usuariosesion != null)
+                {
+                    _bitacoraService.Registrar(usuariosesion.Email, "Creación de usuario", $"Usuario con email {usuario.Email} creado");
+                }
+                else
+                {
+                    MessageBox.Show("No hay un usuario activo en la sesión.");
+                }
             }
             catch (Exception ex)
             {
