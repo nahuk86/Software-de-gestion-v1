@@ -22,14 +22,14 @@ namespace UI.Forms.Forms_gerente
         private readonly UsuarioServices _usuarioService;
         private readonly Usuario _usuario;
         private readonly BitacoraService _bitacoraService;
-        SesionServices sesionService = new SesionServices();
+        private SesionServices sesionService = new SesionServices();
+        private Usuario usuariosesion; 
 
         public form_crear_usuario()
         {
             InitializeComponent();
             _usuarioService = new UsuarioServices();
             _bitacoraService = new BitacoraService();
-
         }
 
         private void btn_crear_usuario_Click(object sender, EventArgs e)
@@ -50,7 +50,11 @@ namespace UI.Forms.Forms_gerente
                 _usuarioService.CrearUsuario(usuario);
                 MessageBox.Show("Usuario creado con éxito.");
 
-                Usuario usuariosesion = sesionService.GetUsuarioActivo();
+                // Clear the input fields
+                ClearInputFields();
+
+                usuariosesion = sesionService.GetUsuarioActivo();
+
                 if (usuariosesion != null)
                 {
                     _bitacoraService.Registrar(usuariosesion.Email, "Creación de usuario", $"Usuario con email {usuario.Email} creado");
@@ -63,12 +67,23 @@ namespace UI.Forms.Forms_gerente
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al crear el usuario: {ex.Message}");
+                _bitacoraService.Registrar(usuariosesion.Email, "Creación de usuario ha fallado", ex.Message);
+
             }
         }
 
         private void input_email_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ClearInputFields()
+        {
+            input_nombre.Text = string.Empty;
+            input_apellido.Text = string.Empty;
+            input_dni.Text = string.Empty;
+            input_email.Text = string.Empty;
+            input_password.Text = string.Empty;
         }
 
         private void form_crear_usuario_Load(object sender, EventArgs e)
