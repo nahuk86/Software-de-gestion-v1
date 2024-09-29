@@ -101,6 +101,7 @@
     <Compile Include="Forms\Forms_vendedor\registrar_venta.Designer.cs">
       <DependentUpon>registrar_venta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\helpers\FormFactory.cs" />
     <Compile Include="Forms\helpers\FormHelper.cs" />
     <Compile Include="Forms\Home_deposito.cs">
       <SubType>Form</SubType>

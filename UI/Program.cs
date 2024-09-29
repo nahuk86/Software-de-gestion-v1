@@ -26,29 +26,23 @@ namespace UI
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Obtener la cadena de conexión desde App.config
-            var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
+            //var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             // Crear las instancias de UI Handlers
             var depositoUIHandler = new DepositoUIHandler();
             var gerenteUIHandler = new GerenteUIHandler();
-            var vendedorUIHandler = new VendedorUIHandler();
+            //var vendedorUIHandler = new VendedorUIHandler();
             var usuarioService = new UsuarioServices();
             var usuarioServiceBLL = new UsuarioService();
             var sesionService = new SesionServices();
 
-
-
             // Crear la instancia de la fábrica de UI
-            var uiFactory = new RoleBasedUIFactory(depositoUIHandler, gerenteUIHandler, vendedorUIHandler);
-
+            //var uiFactory = new RoleBasedUIFactory(depositoUIHandler, gerenteUIHandler, vendedorUIHandler);
             // Configuración manual de la cadena de conexión
-
             // Iniciar la aplicación con la pantalla de inicio de sesión
-
-            IClienteService clienteService = new ClienteService(connectionString, usuarioServiceBLL); // Pasamos el objeto usuarioService
+            //IClienteService clienteService = new ClienteService(connectionString, usuarioServiceBLL); // Pasamos el objeto usuarioService
 
             PermisosServices permisosService = new PermisosServices();
-            Pantalla_inicio pantallaInicio = new Pantalla_inicio(sesionService, usuarioService, uiFactory, clienteService, permisosService);
+            Pantalla_inicio pantallaInicio = new Pantalla_inicio();
 
 
             Application.Run(pantallaInicio);
