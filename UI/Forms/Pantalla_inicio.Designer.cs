@@ -58,6 +58,7 @@
             this.input_txt_password.Name = "input_txt_password";
             this.input_txt_password.Size = new System.Drawing.Size(178, 22);
             this.input_txt_password.TabIndex = 2;
+            this.input_txt_password.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -90,7 +91,7 @@
             this.Controls.Add(this.input_txt_username);
             this.Controls.Add(this.button_access);
             this.Name = "Pantalla_inicio";
-            this.Text = "Form1";
+            this.Text = "LoginForm";
             this.Load += new System.EventHandler(this.Pantalla_inicio_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
